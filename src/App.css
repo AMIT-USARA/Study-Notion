@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body,HTML{
+    overflow-x: hidden;
+}
+
+.bg_home{
+    background: url("../src/assets/Images/bghome.svg");
+}
+
+.timeline-bg{
+    background: url("../src/assets/Images/TimelineImage.png");
+    background-size: cover;
+}
+
+.instructorImg{
+    background: url("../src/assets/Images/Instructor.png");
+}
+
+.footer p{
+    padding:0px 0 5px 0;
+    font-size:16px;
+    line-height: 24px;
+    cursor:pointer; 
+    font-weight: 600;
+    color:#AFB2BF;
+}
+
+
+.btn-primary {
+    border: 1px solid #2c333f;
+    background-color: #1c1e26;
+    padding: 8px 16px;
+    color: #dbddea;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.btn-primary:hover {
+    background-color: #ffd60a;
+    color: #1c1e26;
+}
+
+
+
+.box3-bg{
+
+    background: url("../src/assets/Images/aboutus3.webp");
+
+}
