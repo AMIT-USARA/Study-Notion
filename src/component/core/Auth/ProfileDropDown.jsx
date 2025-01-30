@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../../services/operations/authAPI";
-import { setUser } from "../../../Slices/authSlice" // Import setUser action from authSlice
+import { setUserauth } from "../../../Slices/authSlice"; // Import setUserauth action from authSlice
+import { VscSignOut } from "react-icons/vsc";
+import { AiOutlineCaretDown } from "react-icons/ai";
+import { VscDashboard } from "react-icons/vsc";
 
 export default function ProfileDropdown() {
   const { user } = useSelector((state) => state.auth); // Use state from authSlice
@@ -29,7 +32,7 @@ export default function ProfileDropdown() {
     if (!user) {
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
-        dispatch(setUser(JSON.parse(storedUser))); // Update Redux store with user data
+        dispatch(setUserauth(JSON.parse(storedUser))); // Update Redux store with user data
       }
     }
   }, [user, dispatch]);
@@ -40,7 +43,7 @@ export default function ProfileDropdown() {
   return (
     <div className="relative" ref={ref}>
       <button
-        className="flex items-center gap-x-1"
+        className="flex items-center gap-x-1 py-2 px-3 rounded-md hover:bg-richblack-700 transition-all"
         onClick={() => setOpen((prev) => !prev)} // Toggle dropdown visibility
       >
         <img
@@ -48,25 +51,30 @@ export default function ProfileDropdown() {
           alt={`profile-${user?.firstName || "user"}`}
           className="aspect-square w-[30px] rounded-full object-cover"
         />
+        <AiOutlineCaretDown className="text-sm text-richblack-100" />
       </button>
       {open && (
-        <div className="absolute right-0 z-50 mt-2 w-48 divide-y divide-gray-200 rounded-md bg-richblack-700 shadow-lg">
-          <Link
-            to="/dashboard/my-profile"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            onClick={() => setOpen(false)} // Close dropdown when link clicked
-          >
-            Dashboard
-          </Link>
-          <button
-            onClick={() => {
-              dispatch(logout(navigate)); // Dispatch logout action
-              setOpen(false); // Close dropdown after logout
-            }}
-            className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-          >
-            Logout
-          </button>
+        <div className="absolute top-[118%] mt-1 right-0 z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-richblack-800 flex flex-col gap-1 py-2 transition-all opacity-100">
+          <div className="flex flex-col gap-1">
+            <Link
+              to="/dashboard/my-profile"
+              className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:text-richblack-25 transition-all"
+              onClick={() => setOpen(false)} // Close dropdown when link clicked
+            >
+              <VscDashboard className="text-lg" />
+              Dashboard
+            </Link>
+            <button
+              onClick={() => {
+                dispatch(logout(navigate)); // Dispatch logout action
+                setOpen(false); // Close dropdown after logout
+              }}
+              className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25 transition-all"
+            >
+              <VscSignOut className="text-lg" />
+              Logout
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -636,11 +636,12 @@ import { apiConnector } from "../../services/apiconnector";
 import { categories } from "../../services/api";
 import { MdKeyboardArrowDown} from "react-icons/md";
 import { PiDotsThreeOutlineVerticalDuotone } from "react-icons/pi";
-
+import { setUserauth } from "../../Slices/authSlice";
 import '../../App.css'
 function Navbar() {
-    let { user } = useSelector((state) => state.profile);
-    // const dispatch = useDispatch();
+    let { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+
     // const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
@@ -649,9 +650,12 @@ function Navbar() {
 
     useEffect(() => {
         if (!user) {
-            // Optionally fetch the user data again if not available
+          const storedUser = localStorage.getItem("user");
+          if (storedUser) {
+            dispatch(setUserauth(JSON.parse(storedUser))); // Update Redux store with user data
+          }
         }
-    }, [user]);
+      }, [user, dispatch]);
 
     const { token } = useSelector((state) => state.auth);
     const { totalItams } = useSelector((state) => state.cart);
@@ -749,7 +753,7 @@ function Navbar() {
 
                 {/* User Actions */}
                 <div className="flex items-center gap-4">
-                    {user && user?.accountType !== "Instructor" && (
+                    {token && user?.accountType !== "Instructor" && (
                         <Link to="/dashboard/cart" className="relative">
                             <AiOutlineShoppingCart size={24} className="text-[#DBDDEA]" />
                             {totalItams > 0 && (

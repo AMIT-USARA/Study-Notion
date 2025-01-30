@@ -2,7 +2,8 @@ import { toast } from "react-hot-toast"
 
 import { setLoading, setToken } from "../../Slices/authSlice"
 import { resetCart } from "../../Slices/cartSlice"
-import { setUser } from "../../Slices/profileSlice"
+import { setUserauth } from "../../Slices/authSlice"
+import { setUserprofile } from "../../Slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { endpoints } from '../api'
 // import { error } from "toastr"
@@ -16,6 +17,7 @@ const {
 } = endpoints
 
 export function sendOtp(email, navigate) {
+
   return async (dispatch) => { 
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
@@ -113,11 +115,11 @@ export function login(email, password, navigate) {
       // Set user image if not provided
       const userImage = user?.image
         ? user.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName} ${user.lastName}`;
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName}%20${user.lastName}`;
 
       // Save token and user to Redux store
       dispatch(setToken(token));
-      dispatch(setUser({ ...user, image: userImage }));
+      dispatch(setUserauth({ ...user, image: userImage }));
 
       // Persist token and user in local storage
       localStorage.setItem("token", token);
@@ -190,9 +192,11 @@ export function resetPassword(password, confirmPassword, token, navigate) {
 }
 
 export function logout(navigate) {
+  
   return (dispatch) => {
     dispatch(setToken(null))
-    dispatch(setUser(null))
+    dispatch(setUserauth(null))
+    dispatch(setUserprofile(null))
     dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")

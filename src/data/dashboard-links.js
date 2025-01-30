@@ -32,7 +32,14 @@ export const sidebarLinks = [
     name: "Enrolled Courses",
     path: "/dashboard/enrolled-courses",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "VscMortarBoard",
+    icon: "VscArchive",
+  },
+  {
+    id: 7,
+    name: "Wishlist",
+    path: "/dashboard/wishlist",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "VscBookmark",
   },
   {
     id: 6,
@@ -40,5 +47,12 @@ export const sidebarLinks = [
     path: "/dashboard/purchase-history",
     type: ACCOUNT_TYPE.STUDENT,
     icon: "VscHistory",
+  },
+  {
+    id: 8,
+    name: "Courses",
+    path: "/dashboard/all-courses",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "VscMortarBoard",
   },
 ];

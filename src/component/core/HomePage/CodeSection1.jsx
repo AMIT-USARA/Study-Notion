@@ -26,7 +26,7 @@ function CodeSection1() {
                     btnText:"Learn More",
                   }  
                 }
-                codeblock = {`<!DOCTYPE html>/n<html>\nhead><title>Example</title><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n/h1>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`} 
+                codeblock = {`<!DOCTYPE html><html><head>\n<title>Example</title><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n/h1>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`} 
                 backgroundGradient = "bg-gradient-to-br to-[#8A2BE2,#FFA500] from-[#F8F8FF]" 
                 codeColor ="text-yellow-100"
                 />

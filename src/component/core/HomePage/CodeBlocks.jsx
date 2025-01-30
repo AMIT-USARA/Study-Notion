@@ -34,7 +34,7 @@ const CodeBlocks = ({ position, heading, subheading, ctabtn1, ctabtn2, codeblock
                     <div className={`w-[300px] h-[205px] ${backgroundGradient} blur-[68px] rounded-[100%]`}></div>
                 </div>
                 
-                <div className='absolute z-10 lg:w-[380px] p-[8px] flex bg-[#3d3d3d50] border-[1px] border-[#ffffff38]'>
+                <div className='absolute z-10 lg:w-[380px] pr-[8px] flex bg-[#3d3d3d50] border-[1px] border-[#ffffff38]'>
                     
                     <div className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} px-2 leading-[25px]`}>
                         <TypeAnimation
