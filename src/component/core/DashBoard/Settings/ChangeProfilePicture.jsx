@@ -65,7 +65,7 @@ export default function ChangeProfilePicture() {
       <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
         <div className="flex items-center gap-x-4">
           <img
-            src={user.image? user.image : previewSource}
+            src={previewSource || user.image} // Prioritize previewSource over user.image
             alt={`profile-${user?.firstName}`}
             className="aspect-square w-[78px] rounded-full object-cover"
           />
