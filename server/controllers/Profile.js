@@ -165,4 +165,4 @@ exports.getEnrolledCourses = async (req, res) => {
         message: error.message,
       })
     }
-};
+  };

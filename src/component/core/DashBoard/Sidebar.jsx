@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import { sidebarLinks } from '../../../data/dashboard-links'
 import { logout } from '../../../services/operations/authAPI'
@@ -86,4 +87,4 @@ function Sidebar() {
     )
 }
 
-export default Sidebar
+export default Sidebar;

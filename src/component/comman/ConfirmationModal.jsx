@@ -1,3 +1,4 @@
+
 import React from 'react'
 import IconBtn from './IconBtn'
 
@@ -27,5 +28,6 @@ function ConfirmationModal({modalData}) {
     </div>
   )
 }
+
 
 export default ConfirmationModal

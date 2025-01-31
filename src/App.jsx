@@ -17,6 +17,7 @@ import Error from "./pages/Error";
 import Setting from "./component/core/DashBoard/Settings";
 import EnrolledCourses from "./component/core/DashBoard/EnrolledCourses";
 import Wishlist from "./component/core/DashBoard/Wishlist";
+
 function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
@@ -99,7 +100,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-          <Route
+              <Route
                 path="dashboard/wishlist"
                 element={
                   <ProtectedRoute>
@@ -108,12 +109,14 @@ function App() {
                 }
               />
           <Route
+
                 path="dashboard/settings"
                 element={
                   <ProtectedRoute>
                     <Setting />
                   </ProtectedRoute>
                 }
+
               />
               <Route
                 path="dashboard/enrolled-courses"

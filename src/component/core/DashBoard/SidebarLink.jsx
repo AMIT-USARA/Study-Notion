@@ -1,3 +1,4 @@
+
 import React from 'react'
 import * as Icons from 'react-icons/vsc'
 import { useDispatch } from 'react-redux';
@@ -18,7 +19,7 @@ function SidebarLink({ link, iconName }) {
         >
 
             <span className={`absolute left-0 top-0 w-[0.2rem] h-full bg-yellow-5 ${matchRoute(link.path) ? 'bg-opacity-100' : 'bg-opacity-0'}`}>
-
+                
 
             </span>
             <div className='flex items-center gap-x-2'>
