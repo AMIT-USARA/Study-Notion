@@ -1,5 +1,6 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
+const Course = require("../models/Course");
 const cloudinary=require("../config/cloudinary");
 const {uploadImageToCloudinary} = require("../utils/imageUploader");
 
@@ -68,6 +69,12 @@ exports.deleteAccount = async (req,res) => {
                 success:false,
                 message:"User not found",
             });
+        }
+        const courses = await Course.find({ instructor: id}); // Fetch all courses
+        for (const course of courses) {
+            await Course.deleteOne({ _id: course._id }); // Delete each course
+            // Optionally, delete related data (e.g., lessons, enrollments)
+            
         }
         //delete profile
         await Profile.findByIdAndDelete({_id:userDetails.additionalDetails});

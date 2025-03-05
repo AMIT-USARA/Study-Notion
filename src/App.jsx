@@ -16,9 +16,15 @@ import ProtectedRoute from "./component/core/Auth/ProtectedRoute";
 import Error from "./pages/Error";
 import Setting from "./component/core/DashBoard/Settings";
 import EnrolledCourses from "./component/core/DashBoard/EnrolledCourses";
-import Wishlist from "./component/core/DashBoard/Wishlist";
+import Wishlist from "./component/core/DashBoard/WishList";
+import { ACCOUNT_TYPE } from "./utils/constants";
+import { useSelector } from "react-redux";
+import AllCourses from "./component/core/DashBoard/AllCourses";
+import MyCourses from "./component/core/DashBoard/MyCourses";
+import AddCourse from "./component/core/DashBoard/AddCourse";
 
 function App() {
+  const {user} = useSelector((state)=>state.auth);
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
       <Navbar />
@@ -83,49 +89,28 @@ function App() {
           }
         />
 
-        <Route
-          element={
-            <ProtectedRoute>
-              <DashBoard />
-              
-            </ProtectedRoute>
+        <Route element={ <ProtectedRoute> <DashBoard /> </ProtectedRoute> } >
+          <Route path="dashboard/my-profile" element={ <ProtectedRoute> <MyProfile /> </ProtectedRoute> } />
+          <Route path="dashboard/settings" element={ <ProtectedRoute> <Setting /> </ProtectedRoute> } />
+          {
+            user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+                <Route path="dashboard/wishlist" element={ <ProtectedRoute> <Wishlist /> </ProtectedRoute> } />
+                <Route path="dashboard/cart" element={ <ProtectedRoute> <Wishlist /> </ProtectedRoute> } />
+                <Route path="dashboard/enrolled-courses" element={ <ProtectedRoute> < EnrolledCourses/> </ProtectedRoute> } />
+                <Route path="dashboard/all-courses" element={ <ProtectedRoute> < AllCourses/> </ProtectedRoute> } />
+              </>
+            )
           }
-          
-        >
-          <Route
-                path="dashboard/my-profile"
-                element={
-                  <ProtectedRoute>
-                    <MyProfile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="dashboard/wishlist"
-                element={
-                  <ProtectedRoute>
-                    <Wishlist />
-                  </ProtectedRoute>
-                }
-              />
-          <Route
-
-                path="dashboard/settings"
-                element={
-                  <ProtectedRoute>
-                    <Setting />
-                  </ProtectedRoute>
-                }
-
-              />
-              <Route
-                path="dashboard/enrolled-courses"
-                element={
-                  <ProtectedRoute>
-                    < EnrolledCourses/>
-                  </ProtectedRoute>
-                }
-              />
+          {
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route path="dashboard/my-courses" element={ <ProtectedRoute> <MyCourses /> </ProtectedRoute> } />
+                <Route path="dashboard/add-course" element={ <ProtectedRoute> <AddCourse /> </ProtectedRoute> } />
+                
+              </>
+            )
+          }
         </Route>
 
 

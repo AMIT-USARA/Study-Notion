@@ -42,7 +42,7 @@ function TagSection() {
           </div>
           <div className='w-full flex justify-center'>
             <div className='max-500:overflow-x-scroll '>
-              <div className='max-500:w-[700px] bg-richblack-800  min-500:flex-wrap w-[435px]   md:w-[700px] flex rounded-3xl md:rounded-full mt-[50px] justify-center md:justify-between py-[5px]'>
+              <div className='max-500:w-[720px] bg-richblack-800  min-500:flex-wrap w-[435px]   md:w-[720px] flex rounded-3xl md:rounded-full mt-[50px] justify-center md:justify-between py-[5px]'>
 
                  {tabsName.map((ele, index) => {
                 return (

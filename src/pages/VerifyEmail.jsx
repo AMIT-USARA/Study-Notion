@@ -84,10 +84,10 @@ return (
                         renderInput={(props) => (
                             <input
                                 {...props}
-                                className="w-10 h-10 text-center border-2 border-gray-400 bg-black rounded-md"
+                                className="  text-center border-2 mx-2 border-pure-greys-400 bg-black rounded-md"
                             />
                         )}
-                    />
+                    />.
                     <button
 
                         className="w-full py-2 px-4 bg-blue-600 rounded-md text-white font-semibold hover:bg-blue-700 disabled:bg-blue-400"

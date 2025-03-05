@@ -112,8 +112,11 @@ exports.getAllCourses = async (req,res) => {
                                                     price:true,
                                                     thumbnail:true,
                                                     instructor:true,
+                                                    courseDescription:true,
                                                     retingAndReviews:true,
-                                                    studentsEnrolled:true,})
+                                                    studentsEnrolled:true,
+                                                    status:true,
+                                                })
                                                     .populate("instructor")
                                                     .exec();
             return res.status(200).json({

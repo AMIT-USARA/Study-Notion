@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { sidebarLinks } from '../../../data/dashboard-links'
 import { logout } from '../../../services/operations/authAPI'
 import { useDispatch, useSelector } from 'react-redux'
-import { VscSettingsGear } from "react-icons/vsc";
 import { VscSignOut } from "react-icons/vsc";
 import SidebarLink from './SidebarLink'
 import { useNavigate } from 'react-router-dom';

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 // import { contactusEndpoint } from '../../../services/api';
 import countrycode from '../../../data/countrycode.json'
-import CTAButton from '../HomePage/CTAButton';
 function ContectForm() {
-    const [loading, setLoading] = useState(false);
+    const [loading , setLoading] = useState(false);
     const {
         register,
         handleSubmit,

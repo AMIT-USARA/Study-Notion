@@ -6,3 +6,8 @@
 body,HTML{
     overflow-x: hidden;
 }
+
+.text{
+    font-size: 10px;
+    font-weight: 500;
+}
