@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
+const upload = require('../middlewares/multer');
 
 const {createCourse,
     getAllCourses,
@@ -54,7 +55,7 @@ router.post("/getCourseDetails", getCourseDetails)
 // ********************************************************************************************************
 // Category can Only be Created by Admin
 // TODO: Put IsAdmin Middleware here
-router.post("/createCategory", auth, isAdmin, createCategory)
+router.post("/createCourse",auth,isInstructor,upload.single('thumbnail'),createCourse);
 router.get("/showAllCategories", showAllCategories)
 router.post("/getCategoryPageDetails", categoryPageDetails)
 

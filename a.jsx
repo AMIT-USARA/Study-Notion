@@ -1,5 +1,5 @@
-// usaraamit2007@gmail.com-> instructor ->1234
-//amitusara2007@gmail.com => instructor =>1234
+// usaraa.....07@gmail.com-> instructor
+//amitu.....07@gmail.com => instructor
 
-//amitusarasarapadha@gmail.com=>Admin=>1234
-//amit3.230101023@iiitbh.ac.in => student=>1234
+//amitu..rasa.....a@gmail.com=>Admin
+//amit3...............in => student
