@@ -5,8 +5,12 @@ const router = express.Router();
 const upload = require('../middlewares/multer');
 
 const {createCourse,
-    getAllCourses,
-    getCourseDetails} = require("../controllers/Course");
+  getAllCourses,
+  getCourseDetails,
+  getFullCourseDetails,
+  editCourse,
+  getInstructorCourses,
+  deleteCourse,} = require("../controllers/Course");
 
 const {createCategory,
     showAllCategories,
@@ -49,13 +53,22 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 router.get("/getAllCourses", getAllCourses)
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", getCourseDetails)
+// Delete a Course
+router.delete("/deleteCourse", deleteCourse)
+// Get all Registered Courses
+router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+// Edit Course routes
+router.post("/editCourse", auth, isInstructor, editCourse)
+// Get all Courses Under a Specific Instructor
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)
 // ********************************************************************************************************
 // Category can Only be Created by Admin
 // TODO: Put IsAdmin Middleware here
-router.post("/createCourse",auth,isInstructor,upload.single('thumbnail'),createCourse);
+router.post("/createCategory",auth,isAdmin,upload.single('thumbnail'),createCategory);
 router.get("/showAllCategories", showAllCategories)
 router.post("/getCategoryPageDetails", categoryPageDetails)
 

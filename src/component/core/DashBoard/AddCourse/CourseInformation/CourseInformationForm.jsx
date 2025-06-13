@@ -7,11 +7,12 @@ import {
   fetchCourseCategories,
 } from '../../../../../services/operations/courseDetailsAPI';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
-import { BiUpload } from 'react-icons/bi';
 import RequirementField from './RequirementField';
 import { setStep, setCourse } from '../../../../../Slices/courseSlice';
 import IconBtn from '../../../../../component/comman/IconBtn';
 import { COURSE_STATUS } from '../../../../../utils/constants';
+import ChipInput from "./ChipInput";
+import Upload from '../Upload';
 import { toast } from 'react-hot-toast';
 
 const CourseInformationForm = () => {
@@ -28,16 +29,13 @@ const CourseInformationForm = () => {
   const { course, editCourse } = useSelector((state) => state.course);
   const [loading, setLoading] = useState(false);
   const [courseCategories, setCourseCategories] = useState([]);
-  const [thumbnailPreview, setThumbnailPreview] = useState(null);
-  const [thumbnailFile, setThumbnailFile] = useState(null);
-  const [tags, setTags] = useState([]);
-  const [inputTag, setInputTag] = useState('');
 
   useEffect(() => {
     const getCategories = async () => {
       setLoading(true);
       const categories = await fetchCourseCategories();
       if (categories.length > 0) {
+       
         setCourseCategories(categories);
       }
       setLoading(false);
@@ -50,44 +48,10 @@ const CourseInformationForm = () => {
       setValue("courseBenefits", course.whatYouWillLearn);
       setValue("courseCategory", course.category._id || course.category);
       setValue("courseRequirements", course.instructions || []);
-      setThumbnailPreview(course.thumbnail);
-
-      const initialTags = Array.isArray(course.tag)
-        ? course.tag
-        : (course.tag || '').split(',').map(tag => tag.trim()).filter(Boolean);
-      setTags(initialTags);
     }
 
     getCategories();
   }, [editCourse, course, setValue]);
-
-  const handleThumbnailChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setThumbnailFile(file);
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        setThumbnailPreview(reader.result);
-      };
-    }
-  };
-
-  const handleAddTag = (e) => {
-    if (e.key === 'Enter' && inputTag.trim() !== '') {
-      e.preventDefault();
-      if (!tags.includes(inputTag.trim())) {
-        setTags([...tags, inputTag.trim()]);
-        setInputTag('');
-      }
-    }
-  };
-
-  const removeTag = (index) => {
-    const newTags = [...tags];
-    newTags.splice(index, 1);
-    setTags(newTags);
-  };
 
   const isFormUpdated = () => {
     const currentValues = getValues();
@@ -97,26 +61,34 @@ const CourseInformationForm = () => {
       currentValues.coursePrice !== course.price ||
       currentValues.courseBenefits !== course.whatYouWillLearn ||
       currentValues.courseCategory !== (course.category._id || course.category) ||
-      (thumbnailFile && thumbnailPreview !== course.thumbnail) ||
-      JSON.stringify(currentValues.courseRequirements) !== JSON.stringify(course.instructions) ||
-      JSON.stringify(tags) !== JSON.stringify(course.tag)
+      (currentValues.thumbnail && currentValues.thumbnail !== course.thumbnail) ||
+      JSON.stringify(currentValues.courseRequirements) !== JSON.stringify(course.instructions)
     );
   };
 
   const onSubmit = async (data) => {
+
+
+console.log("catagory :-", data.courseCategory);
+
     const formData = new FormData();
 
     formData.append("courseName", data.courseTitle);
     formData.append("courseDescription", data.courseShortDesc);
     formData.append("price", data.coursePrice);
     formData.append("whatYouWillLearn", data.courseBenefits);
+    formData.append("tags", JSON.stringify(data.courseTags))
     formData.append("category", data.courseCategory);
     formData.append("instructions", JSON.stringify(data.courseRequirements));
-    formData.append("tag", JSON.stringify(tags));
     formData.append("status", COURSE_STATUS.DRAFT);
 
-    if (thumbnailFile) {
-      formData.append("thumbnail", thumbnailFile);
+
+    if (data.thumbnail instanceof File) {
+      
+      formData.append("thumbnailFile", data.thumbnail);
+    } else if (editCourse && course.thumbnail) {
+      
+      formData.append("thumbnailFile", course.thumbnail);
     }
 
     try {
@@ -151,7 +123,6 @@ const CourseInformationForm = () => {
   };
 
   return (
-    
     <form onSubmit={handleSubmit(onSubmit)} className="rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8">
       {/* Course Title */}
       <div className="flex flex-col space-y-2">
@@ -234,69 +205,25 @@ const CourseInformationForm = () => {
       </div>
 
       {/* Course Tags */}
-      <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5">
-          Course Tags <sup className="text-pink-200">*</sup>
-        </label>
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-wrap gap-2 mb-2">
-            {tags.map((tag, index) => (
-              <div key={index} className="flex items-center bg-richblack-600 text-richblack-5 px-2 py-1 rounded-full text-xs">
-                {tag}
-                <button type="button" onClick={() => removeTag(index)} className="ml-1 text-richblack-300 hover:text-richblack-100">
-                  ×
-                </button>
-              </div>
-            ))}
-          </div>
-          <input
-            type="text"
-            value={inputTag}
-            onChange={(e) => setInputTag(e.target.value)}
-            onKeyDown={handleAddTag}
-            placeholder="Type a tag and press Enter"
-            className="form-style w-full bg-richblack-700 text-richblack-5 p-3 rounded-md border-b border-richblack-500 focus:outline-none focus:ring-1 focus:ring-richblack-200"
-          />
-          <p className="text-xs text-richblack-400">Press Enter to add tags</p>
-        </div>
-      </div>
+      <ChipInput
+        label="Tags"
+        name="courseTags"
+        placeholder="Enter Tags and press Enter"
+        register={register}
+        errors={errors}
+        setValue={setValue}
+        getValues={getValues}
+      />
 
       {/* Course Thumbnail */}
-      <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5">
-          Course Thumbnail <sup className="text-pink-200">*</sup>
-        </label>
-        <div className="flex flex-col items-center justify-center w-full">
-          <label
-            htmlFor="thumbnail"
-            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer 
-              ${thumbnailPreview ? 'border-richblack-500' : 'border-richblack-500 hover:border-richblack-200'} 
-              bg-richblack-700 hover:bg-richblack-600 transition-all duration-200`}
-          >
-            {thumbnailPreview ? (
-              <div className="relative w-full h-full rounded-lg overflow-hidden">
-                <img src={thumbnailPreview} alt="Thumbnail Preview" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-                  <BiUpload className="text-3xl text-white" />
-                  <span className="text-white ml-2">Change Thumbnail</span>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <BiUpload className="text-4xl text-richblack-200 mb-3" />
-                <p className="mb-2 text-sm text-richblack-200">
-                  <span className="font-semibold">Click to upload</span> or drag and drop
-                </p>
-                <p className="text-xs text-richblack-400">SVG, PNG, JPG or GIF (MAX. 2MB)</p>
-              </div>
-            )}
-            <input id="thumbnail" type="file" accept="image/*" className="hidden" onChange={handleThumbnailChange} />
-          </label>
-        </div>
-        {!thumbnailPreview && errors.thumbnail && (
-          <span className="text-xs text-pink-200">Thumbnail is required**</span>
-        )}
-      </div>
+      <Upload
+        name="thumbnail"
+        label="Course Thumbnail"
+        register={register}
+        setValue={setValue}
+        errors={errors}
+        editData={editCourse ? course?.thumbnail : null}
+      />
 
       {/* Benefits of the Course */}
       <div className="flex flex-col space-y-2">

@@ -1,109 +1,165 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { getAllCourses } from '../../../services/operations/profileAPI';
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdOutlineEdit } from "react-icons/md";
+// import React, { useCallback, useEffect, useState } from 'react'
+// import { useSelector } from 'react-redux'
+// import { getAllCourses } from '../../../services/operations/profileAPI';
+// import { RiDeleteBin6Line } from "react-icons/ri";
+// import { MdOutlineEdit } from "react-icons/md";
 
+// function MyCourses() {
+//     const [allCourses, setAllCourses] = useState([]);
+//     const { token } = useSelector((state) => state.auth);
+//     const { user } = useSelector((state) => state.auth);
+//     const getAllCoursesData = useCallback(async () => {
+//         try {
+//             const response = await getAllCourses();
+//             if (Array.isArray(response)) {
+//                 setAllCourses(response);
+//             } else {
+//                 setAllCourses([]); // Ensures it's always an array
+//             }
+//             console.log("response getAllCourses:-", response);
+//         } catch (error) {
+//             console.log("Unable to Fetch All Courses.");
+//             setAllCourses([]); // In case of error, avoid breaking UI
+//         }
+//     }, []);
+
+//     useEffect(() => {
+//         getAllCoursesData();
+//     }, [getAllCoursesData]);
+
+
+
+//     return (
+//         <div className="min-h-screen  p-10">
+//             <h2 className="text-3xl font-bold text-left  mb-8">All Courses</h2>
+
+//             {allCourses.length === 0 ? (
+//                 <p className="text-center text-lg text-gray-600">No Courses Found.</p>
+//             ) : (
+//                 <div className='grid grid-rows-1'>
+// <div className='grid grid-cols-12'>
+//                 <div className='flex  items-center col-span-2'>Course</div>
+//                 <div className='flex justify-center items-center col-span-6'></div>
+//                 <div className='flex justify-center items-center col-span-1'>Status</div>
+//                 <div className='flex justify-center items-center col-span-1'>Price</div>
+//                 <div className='flex justify-center items-center col-span-1'>Action</div>
+// </div>
+// <div className='flex flex-col gap-4 '>{
+
+
+// allCourses.map((course, index) => {
+//     return (
+//         <div key={index} >
+//             {course.instructor._id === user._id ? <div key={course._id || index} className="grid  grid-cols-12  gap-4 shadow-lg rounded-xl overflow-hidden p-3">
+
+
+
+//                 <div className='col-span-2 flex justify-center items-center '>
+//                     {course.thumbnail && (
+//                         <img
+//                             src={course.thumbnail}
+//                             alt={course.courseName}
+//                             className="w-3/4 object-cover rounded-lg  hover:scale-[1.1]"
+//                         />
+//                     )}
+
+//                 </div>
+//                 <div className='col-span-6  grid grid-row-4'>
+//                     <h3 className="text-xl font-semibold">{course.courseName}</h3>
+//                     <p className=" text-pure-greys-500 font-normal text-sm">{course.courseDescription}</p>
+//                     <p className="text-gray-600">Instructor: <span className="font-medium">{course?.instructor?.firstName} {course?.instructor?.lastName}</span></p>
+
+//                     <p className="text-yellow-500 font-medium">Rating: {course.ratingAndReviews?.rating || "N/A"}</p>
+//                     <p className="text-gray-700">Students Enrolled: {course.studentsEnrolled.length}</p>
+
+
+//                 </div>
+
+//                 <div className='col-span-1 flex flex-col items-center justify-evenly  '>
+//                 <p className='text-sm w-fit p-2 text-yellow-5 bg-pure-greys-400 rounded-full block'>{course.status}</p>
+
+//                 </div>
+//                 <div className='col-span-1 flex flex-col items-center justify-evenly  '>
+//                     <div className=''><p className="text-gray-700 font-semibold mt-2"><span className="text-yellow-50">${course.price}</span></p></div>
+
+//                 </div>
+
+//                 <div className='col-span-1  flex items-center justify-evenly '>
+//                     <button><RiDeleteBin6Line /></button>
+//                     <button><MdOutlineEdit /></button>
+//                 </div>
+
+
+
+//             </div> : <div></div>}
+
+//         </div>
+//     )
+// })}
+
+// </div>
+//                 </div>
+//             )}
+//         </div>
+
+//     )
+// }
+
+// export default MyCourses
+
+
+
+
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { fetchInstructorCourses } from '../../../services/operations/courseDetailsAPI';
+import IconBtn from '../../comman/IconBtn'
+import { IoMdAdd } from "react-icons/io";
+import CoursesTable from './InstructorCourses/CoursesTable';
 function MyCourses() {
-    const [allCourses, setAllCourses] = useState([]);
+
     const { token } = useSelector((state) => state.auth);
-    const { user } = useSelector((state) => state.auth);
-    const getAllCoursesData = useCallback(async () => {
-        try {
-            const response = await getAllCourses();
-            if (Array.isArray(response)) {
-                setAllCourses(response);
-            } else {
-                setAllCourses([]); // Ensures it's always an array
-            }
-            console.log("response getAllCourses:-", response);
-        } catch (error) {
-            console.log("Unable to Fetch All Courses.");
-            setAllCourses([]); // In case of error, avoid breaking UI
-        }
-    }, []);
+    const navigate = useNavigate();
+    const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        getAllCoursesData();
-    }, [getAllCoursesData]);
+        const fatchCourses = async () => {
+            let result = await fetchInstructorCourses(token);
+            if (result) {
+                setCourses(result);
+            }
+        }
+
+        fatchCourses();
+    }, []);
 
 
 
     return (
-        <div className="min-h-screen  p-10">
-            <h2 className="text-3xl font-bold text-left  mb-8">All Courses</h2>
-
-            {allCourses.length === 0 ? (
-                <p className="text-center text-lg text-gray-600">No Courses Found.</p>
-            ) : (
-                <div className='grid grid-rows-1'>
-<div className='grid grid-cols-12'>
-                <div className='flex  items-center col-span-2'>Course</div>
-                <div className='flex justify-center items-center col-span-6'></div>
-                <div className='flex justify-center items-center col-span-1'>Status</div>
-                <div className='flex justify-center items-center col-span-1'>Price</div>
-                <div className='flex justify-center items-center col-span-1'>Action</div>
-</div>
-<div className='flex flex-col gap-4 '>{
-
-
-allCourses.map((course, index) => {
-    return (
-        <div key={index} >
-            {course.instructor._id === user._id ? <div key={course._id || index} className="grid  grid-cols-12  gap-4 shadow-lg rounded-xl overflow-hidden p-3">
-                
-                
-                
-                <div className='col-span-2 flex justify-center items-center '>
-                    {course.thumbnail && (
-                        <img
-                            src={course.thumbnail}
-                            alt={course.courseName}
-                            className="w-3/4 object-cover rounded-lg  hover:scale-[1.1]"
-                        />
-                    )}
-
-                </div>
-                <div className='col-span-6  grid grid-row-4'>
-                    <h3 className="text-xl font-semibold">{course.courseName}</h3>
-                    <p className=" text-pure-greys-500 font-normal text-sm">{course.courseDescription}</p>
-                    <p className="text-gray-600">Instructor: <span className="font-medium">{course?.instructor?.firstName} {course?.instructor?.lastName}</span></p>
-                    
-                    <p className="text-yellow-500 font-medium">Rating: {course.ratingAndReviews?.rating || "N/A"}</p>
-                    <p className="text-gray-700">Students Enrolled: {course.studentsEnrolled.length}</p>
-                    
-
-                </div>
-
-                <div className='col-span-1 flex flex-col items-center justify-evenly  '>
-                <p className='text-sm w-fit p-2 text-yellow-5 bg-pure-greys-400 rounded-full block'>{course.status}</p>
-
-                </div>
-                <div className='col-span-1 flex flex-col items-center justify-evenly  '>
-                    <div className=''><p className="text-gray-700 font-semibold mt-2"><span className="text-yellow-50">${course.price}</span></p></div>
-
-                </div>
-
-                <div className='col-span-1  flex items-center justify-evenly '>
-                    <button><RiDeleteBin6Line /></button>
-                    <button><MdOutlineEdit /></button>
-                </div>
-
-                
-
-            </div> : <div></div>}
-
-        </div>
-    )
-})}
-
-</div>
-                </div>
-            )}
+    <div className='w-full space-y-8'>
+        <div className='w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-4'>
+            <h1 className="text-2xl md:text-3xl font-bold text-richblack-5">
+                My Courses
+            </h1>
+            <IconBtn
+                text="Add Course"
+                onClick={() => { navigate("/dashboard/add-course") }}
+                active={true}
+                customClasses="w-full md:w-fit"
+            >
+                <IoMdAdd className="text-lg" />
+            </IconBtn>
         </div>
 
-    )
-}
+        {courses ? (
+            <CoursesTable courses={courses} setCourses={setCourses} />
+        ) : (
+            <div className="grid place-items-center h-[calc(100vh-200px)]">
+                <div className="h-12 w-12 border-4 border-richblack-200 border-t-richblack-50 rounded-full animate-spin"></div>
+            </div>
+        )}
+    </div>
+)}
 
 export default MyCourses
-

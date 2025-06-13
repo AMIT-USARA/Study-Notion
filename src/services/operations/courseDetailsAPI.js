@@ -143,20 +143,23 @@ export const createSection = async (data, token) => {
     if (!response?.data?.success) {
       throw new Error("Could Not Create Section")
     }
-    toast.success("Course Section Created")
-    result = response?.data?.updatedCourse
+    toast.success("Course Section Created.")
+    result = response?.data?.updatedCourseDetails;
+    
   } catch (error) {
     console.log("CREATE SECTION API ERROR............", error)
     toast.error(error.message)
   }
   toast.dismiss(toastId)
-  return result
+  
+  return result;
 }
 
 // create a subsection
 export const createSubSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
+  
   try {
     const response = await apiConnector("POST", CREATE_SUBSECTION_API, data, {
       Authorization: `Bearer ${token}`,

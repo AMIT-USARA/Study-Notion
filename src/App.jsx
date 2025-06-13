@@ -22,6 +22,9 @@ import { useSelector } from "react-redux";
 import AllCourses from "./component/core/DashBoard/AllCourses";
 import MyCourses from "./component/core/DashBoard/MyCourses";
 import AddCourse from "./component/core/DashBoard/AddCourse";
+import EditCourse from "./component/core/DashBoard/EditCourse/EditCourse";
+import Catalog from "./pages/Catalog";
+import CourseDetails from "./component/core/CourseDetails/CourseDetails";
 
 function App() {
   const {user} = useSelector((state)=>state.auth);
@@ -30,6 +33,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/catalog/:catalogName" element={<Catalog />} />
+        <Route path="/courses/:courseId" element={ <CourseDetails /> } />
         <Route
           path="signup"
           element={
@@ -88,6 +93,7 @@ function App() {
             <ContectUs />
           }
         />
+        
 
         <Route element={ <ProtectedRoute> <DashBoard /> </ProtectedRoute> } >
           <Route path="dashboard/my-profile" element={ <ProtectedRoute> <MyProfile /> </ProtectedRoute> } />
@@ -107,6 +113,7 @@ function App() {
               <>
                 <Route path="dashboard/my-courses" element={ <ProtectedRoute> <MyCourses /> </ProtectedRoute> } />
                 <Route path="dashboard/add-course" element={ <ProtectedRoute> <AddCourse /> </ProtectedRoute> } />
+                <Route path="dashboard/edit-course/:courseId" element={ <ProtectedRoute> <EditCourse /> </ProtectedRoute> } />
                 
               </>
             )

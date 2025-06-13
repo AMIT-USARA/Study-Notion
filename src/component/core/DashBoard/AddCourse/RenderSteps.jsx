@@ -3,6 +3,7 @@ import { FaCheck } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import CourseBuilderForm from './CourseBuilder/CourseBuilderForm';
 import CourseInformationForm from './CourseInformation/CourseInformationForm';
+import PublishCourseForm from './PublishCourse/PublishCourseForm';
 
 const RenderSteps = () => {
   const { step } = useSelector((state) => state.course);
@@ -60,7 +61,7 @@ const RenderSteps = () => {
       <div className="mt-20">
         {step === 1 && <CourseInformationForm />}
         {step === 2 && <CourseBuilderForm />}
-        {/* {step === 3 && <PublishCourse />} */}
+        {step === 3 && <PublishCourseForm />}
       </div>
     </div>
   );

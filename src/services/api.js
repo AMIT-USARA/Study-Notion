@@ -1,4 +1,10 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL
+
+import { config } from '../config';
+
+const { BASE_URL } = config;
+
+
+
 
 // AUTH ENDPOINTS`
 export const endpoints = {
