@@ -35,7 +35,7 @@ function Navbar() {
       }, [user, dispatch]);
 
     const { token } = useSelector((state) => state.auth);
-    const { totalItams } = useSelector((state) => state.cart);
+    const { totalItems } = useSelector((state) => state.cart);
     const location = useLocation();
 
     const [sublinks, setSubLinks] = useState([]);
@@ -133,9 +133,9 @@ function Navbar() {
                     {token && user?.accountType !== "Instructor" && (
                         <Link to="/dashboard/cart" className="relative">
                             <AiOutlineShoppingCart size={24} className="text-[#DBDDEA]" />
-                            {totalItams > 0 && (
-                                <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full px-1">
-                                    {totalItams}
+                            {totalItems > 0 && (
+                                <span className="absolute -bottom-[5px] -right-[12px] font-bold bg-red-600 text-caribbeangreen-50 text-xs rounded-full px-1">
+                                    {totalItems}
                                 </span>
                             )}
                         </Link>

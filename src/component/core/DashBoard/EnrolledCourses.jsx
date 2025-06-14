@@ -1,146 +1,92 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { useSelector } from "react-redux";
-import { getUserEnrolledCourses } from "../../../services/operations/profileAPI";
-import ProgressBar from "react-bootstrap/ProgressBar";
-import { FiBookOpen, FiClock, FiPercent, FiArrowRight } from "react-icons/fi";
+import { useEffect, useState } from "react"
+import ProgressBar from "@ramonak/react-progress-bar"
+import { BiDotsVerticalRounded } from "react-icons/bi"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
-function EnrolledCourses() {
-  const { token } = useSelector((state) => state.auth);
-  const [enrolledCourses, setEnrolledCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
+import { getUserEnrolledCourses } from "../../../services/operations/profileAPI"
 
-  const getEnrolledCourses = useCallback(async () => {
+export default function EnrolledCourses() {
+  const { token } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+
+  const [enrolledCourses, setEnrolledCourses] = useState(null)
+  const getEnrolledCourses = async () => {
     try {
-      setLoading(true);
-      const response = await getUserEnrolledCourses(token);
-      setEnrolledCourses(Array.isArray(response) ? response : []);
-    } catch (error) {
-      console.error("Unable to Fetch Enrolled Courses:", error);
-      setEnrolledCourses([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [token]);
+      const res = await getUserEnrolledCourses(token);
 
+      setEnrolledCourses(res);
+    } catch (error) {
+      console.log("Could not fetch enrolled courses.")
+    }
+  };
   useEffect(() => {
     getEnrolledCourses();
-  }, [getEnrolledCourses]);
+  }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-            Your Learning Dashboard
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Track your progress, revisit lessons, and achieve your learning goals
-          </p>
+    <div className="flex flex-col w-full">
+      <div className="text-3xl text-richblack-50">Enrolled Courses</div>
+      {!enrolledCourses ? (
+        <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+          <div className="spinner"></div>
         </div>
-
-        {loading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      ) : !enrolledCourses.length ? (
+        <p className="grid h-[10vh] w-full place-content-center text-richblack-5">
+          You have not enrolled in any course yet.
+          {/* TODO: Modify this Empty State */}
+        </p>
+      ) : (
+        <div className="my-8 text-richblack-5">
+          {/* Headings */}
+          <div className="flex rounded-t-lg bg-richblack-500 ">
+            <p className="w-[45%] px-5 py-3">Course Name</p>
+            <p className="w-1/4 px-2 py-3">Duration</p>
+            <p className="flex-1 px-2 py-3">Progress</p>
           </div>
-        ) : enrolledCourses.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm p-8 text-center max-w-md mx-auto">
-            <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FiBookOpen className="text-blue-600 text-3xl" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Your Learning Journey Awaits
-            </h3>
-            <p className="text-gray-600 mb-6">
-              You haven't enrolled in any courses yet. Discover our catalog and start learning today!
-            </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center mx-auto">
-              Explore Courses <FiArrowRight className="ml-2" />
-            </button>
-          </div>
-        ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {enrolledCourses.map((course, index) => (
+          {/* Course Names */}
+          {enrolledCourses.map((course, i, arr) => (
+            <div
+              className={`flex items-center border border-richblack-700 ${
+                i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"
+              }`}
+              key={i}
+            >
               <div
-                key={index}
-                className="bg-blue-900 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100"
+                className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3"
+                onClick={() => {
+                  navigate(
+                    `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSection?.[0]?._id}`
+                  )
+                }}
               >
-                {/* Course Thumbnail */}
-                <div className="relative h-48 overflow-hidden">
-                  {course.thumbnail ? (
-                    <img
-                      src={course.thumbnail}
-                      alt={course.courseName}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
-                      <FiBookOpen className="text-white text-5xl" />
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
-                    <h3 className="text-xl font-bold text-white">
-                      {course.courseName}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Course Content */}
-                <div className="p-6">
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                    {course.courseDescription || "No description available"}
+                <img
+                  src={course.thumbnail}
+                  alt="course_img"
+                  className="h-14 w-14 rounded-lg object-cover"
+                />
+                <div className="flex max-w-xs flex-col gap-2">
+                  <p className="font-semibold">{course.courseName}</p>
+                  <p className="text-xs text-richblack-300">
+                    {course.courseDescription.length > 50
+                      ? `${course.courseDescription.slice(0, 50)}...`
+                      : course.courseDescription}
                   </p>
-
-                  {/* Progress Section */}
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center text-gray-700">
-                        <FiClock className="mr-2 text-blue-500" />
-                        <span className="text-sm font-medium">
-                          {course?.totalDuration || "Duration: N/A"}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-gray-700">
-                        <FiPercent className="mr-2 text-blue-500" />
-                        <span className="text-sm font-medium">
-                          {course.progressPercentage || 0}% Complete
-                        </span>
-                      </div>
-                    </div>
-
-                    <ProgressBar
-                      now={course.progressPercentage || 0}
-                      className="h-2"
-                      variant={
-                        course.progressPercentage >= 80
-                          ? "success"
-                          : course.progressPercentage >= 50
-                          ? "info"
-                          : "primary"
-                      }
-                    />
-                  </div>
-
-                  {/* Action Button */}
-                  <button className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-                    {course.progressPercentage === 100 ? (
-                      <>
-                        View Certificate <FiArrowRight className="ml-2" />
-                      </>
-                    ) : (
-                      <>
-                        Continue Learning <FiArrowRight className="ml-2" />
-                      </>
-                    )}
-                  </button>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+              <div className="w-1/4 px-2 py-3">{course?.totalDuration}</div>
+              <div className="flex w-1/5 flex-col gap-2 px-2 py-3">
+                <p>Progress: {course.progressPercentage || 0}%</p>
+                <ProgressBar
+                  completed={course.progressPercentage || 0}
+                  height="8px"
+                  isLabelVisible={false}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
-  );
+  )
 }
-
-export default EnrolledCourses;

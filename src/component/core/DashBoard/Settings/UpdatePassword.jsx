@@ -38,52 +38,56 @@ export default function UpdatePassword() {
               <label htmlFor="password" className="lable-style">
                 Current Password
               </label>
-              <input
-                type={showpassword ? "text" : "password"}
-                name="password"
-                id="password"
-                placeholder="Enter Current Password"
-                className="form-style bg-black"
-                {...register("password", { required: true })}
-              />
-              <span
-                onClick={() => setShowpassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-              >
-                {showpassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-                ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-                )}
-              </span>
+              <div className="flex w-full items-center">
+                <input
+                  type={showpassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  placeholder="Enter Current Password"
+                  className="form-style w-full p-2 rounded-md bg-richblack-900"
+                  {...register("password", { required: true })}
+                />
+                <span
+                  onClick={() => setShowpassword((prev) => !prev)}
+                  className="absolute right-2 flex items-center justify-center  z-[10] cursor-pointer"
+                >
+                  {showpassword ? (
+                    <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  ) : (
+                    <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  )}
+                </span>
+              </div>
               {errors.password && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
                   Please enter your Current Password.
                 </span>
               )}
             </div>
-            <div className="relative flex flex-col gap-2 lg:w-[48%]">
+            <div className="relative flex flex-col  gap-2 lg:w-[48%]">
               <label htmlFor="newPassword" className="lable-style">
                 New Password
               </label>
-              <input
-                type={shownewPassword ? "text" : "password"}
-                name="newPassword"
-                id="newPassword"
-                placeholder="Enter New Password"
-                className="form-style bg-black"
-                {...register("newPassword", { required: true })}
-              />
-              <span
-                onClick={() => setShownewPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-              >
-                {shownewPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-                ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-                )}
-              </span>
+              <div className="flex w-full items-center">
+                <input
+                  type={shownewPassword ? "text" : "password"}
+                  name="newPassword"
+                  id="newPassword"
+                  placeholder="Enter New Password"
+                  className="form-style w-full p-2 rounded-md bg-richblack-900"
+                  {...register("newPassword", { required: true })}
+                />
+                <span
+                  onClick={() => setShownewPassword((prev) => !prev)}
+                  className="absolute right-2 flex items-center justify-center  z-[10] cursor-pointer"
+                >
+                  {shownewPassword ? (
+                    <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  ) : (
+                    <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  )}
+                </span>
+              </div>
               {errors.newPassword && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
                   Please enter your New Password.
@@ -94,24 +98,26 @@ export default function UpdatePassword() {
               <label htmlFor="confirmPassword" className="lable-style">
                 Confirm Password
               </label>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                id="confirmPassword"
-                placeholder="Enter Confirm Password"
-                className="form-style bg-black"
-                {...register("confirmPassword", { required: true })}
-              />
-              <span
-                onClick={() => setShowConfirmPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-              >
-                {showConfirmPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-                ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-                )}
-              </span>
+              <div className="flex w-full items-center">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  placeholder="Enter Confirm Password"
+                  className="form-style w-full p-2 rounded-md bg-richblack-900"
+                  {...register("confirmPassword", { required: true })}
+                />
+                <span
+                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  className="absolute right-2 flex items-center justify-center  z-[10] cursor-pointer"
+                >
+                  {showConfirmPassword ? (
+                    <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  ) : (
+                    <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  )}
+                </span>
+              </div>
               {errors.confirmPassword && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
                   Please enter your Confirm Password.

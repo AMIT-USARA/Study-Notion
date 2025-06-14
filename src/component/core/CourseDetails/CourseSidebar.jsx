@@ -3,31 +3,63 @@ import { FaFileCircleCheck } from "react-icons/fa6"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
 import { buyCourse } from '../../../services/operations/studentFeaturesAPI';
-
+import { ACCOUNT_TYPE } from '../../../utils/constants'
+import toast from 'react-hot-toast';
+import copy from 'copy-to-clipboard';
+import { addToCart } from '../../../Slices/cartSlice';
+import ConfirmationModal from '../../comman/ConfirmationModal';
 const CourseSidebar = ({ courseData }) => {
-const [loading,setLoading] = useState(false);
-const navigate = useNavigate();
-const {user} = useSelector((state)=>state.profile);
-const {token} = useSelector((state)=>state.auth);
-const dispatch = useDispatch();
-const {courseId} = useParams();
-    const handleBuyCourse=()=>{
-        if(token){
-            buyCourse(token,[courseId],user,navigate,dispatch);
+    const [loading, setLoading] = useState(false);
+    const [confirmationModal, setConfirmationModal] = useState(null);
+    const navigate = useNavigate();
+    const { user } = useSelector((state) => state.profile);
+    const { token } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const { courseId } = useParams();
+    const handleBuyCourse = () => {
+        if (token) {
+            buyCourse(token, [courseId], user, navigate, dispatch);
             return;
         }
+        setConfirmationModal({
+            text1: "you are not logged in",
+            text2: "Please login to add to cart",
+            btn1Text: "login",
+            btn2Text: "cancel",
+            btn1Handler: () => navigate('/login'),
+            btn2Handler: () => setConfirmationModal(null),
+        })
     }
 
 
-    const handleOnClick = () =>{
-        
-        navigate("/dashboard/wishlist")
+    const handleAddToCart = () => {
+        if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+            toast.error("you are an Instructor, you cant buy a course");
+            return;
+        }
+        if (token) {
+            console.log("courseData:-",courseData?.data);
+            dispatch(addToCart(courseData?.data));
+            return;
+        }
+        setConfirmationModal({
+            text1: "you are not logged in",
+            text2: "Please login to add to cart",
+            btn1Text: "login",
+            btn2Text: "cancel",
+            btn1Handler: () => navigate('/login'),
+            btn2Handler: () => setConfirmationModal(null),
+        })
+    }
+    const handleShare = () => {
+        copy(window.location.href);
+        toast.success("Link Copied to Clipboard");
     }
 
     // Calculate total duration
     const calculateTotalDuration = () => {
         if (!courseData?.data?.courseContent) return "0 hours"
-        
+
         let totalMinutes = 0
         courseData.data.courseContent.forEach(section => {
             section.subSection.forEach(sub => {
@@ -35,18 +67,18 @@ const {courseId} = useParams();
                 totalMinutes += minutes + (seconds / 60)
             })
         })
-        
+
         const hours = Math.floor(totalMinutes / 60)
         const remainingMinutes = Math.round(totalMinutes % 60)
-        
+
         return `${hours > 0 ? `${hours} hour${hours > 1 ? 's' : ''}` : ''} ${remainingMinutes > 0 ? `${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}` : ''}`.trim()
     }
 
     return (
         <div className='bg-richblack-800 p-6 rounded-lg sticky top-4'>
             {/* Course Thumbnail */}
-            <img 
-                src={courseData?.data?.thumbnail} 
+            <img
+                src={courseData?.data?.thumbnail}
                 alt={courseData?.data?.courseName}
                 className='w-full h-48 object-cover rounded-lg mb-4'
             />
@@ -58,10 +90,10 @@ const {courseId} = useParams();
 
             {/* Buttons */}
             <div className='space-y-3 mb-6'>
-                <button onClick={()=>handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
+                <button onClick={() => handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
                     Buy now
                 </button>
-                <button onClick={handleOnClick} className='w-full bg-richblack-700 text-richblack-5 py-2 rounded-lg font-semibold hover:bg-richblack-600 transition-all duration-200'>
+                <button onClick={handleAddToCart} className='w-full bg-richblack-700 text-richblack-5 py-2 rounded-lg font-semibold hover:bg-richblack-600 transition-all duration-200'>
                     Add to Cart
                 </button>
             </div>
@@ -87,11 +119,20 @@ const {courseId} = useParams();
             </div>
 
             {/* Share Button */}
-            <button className='w-full mt-6 text-yellow-50 font-semibold py-2 rounded-lg border border-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 transition-all duration-200'>
+            <button onClick={handleShare} className='w-full mt-6 text-yellow-50 font-semibold py-2 rounded-lg border border-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 transition-all duration-200'>
                 Share
             </button>
+
+
+
+            {confirmationModal && (<ConfirmationModal modalData={confirmationModal} />)}
+
         </div>
+
+
     )
+
+
 }
 
 export default CourseSidebar;

@@ -8,7 +8,7 @@ function MyProfile() {
     const navigate = useNavigate();
     return (
         <div className='flex justify-center items-center h-full w-full'>
-            <div className="text-white xl:w-8/12 lg:w-10/12  p-6  rounded-lg shadow-md">
+            <div className="text-white xl:w-10/12 lg:w-10/12  p-6  rounded-lg shadow-md">
                 <h1 className="text-3xl font-bold mb-4">My Profile</h1>
 
                 {/* section-1 */}

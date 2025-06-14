@@ -10,47 +10,62 @@ function RenderCartCourse() {
   const dispatch = useDispatch();
 
   return (
-    <div className="mt-6 space-y-6">
-      {cart.map((course, index) => (
+    <div className="space-y-4">
+      {/* Headings */}
+      <div className="flex rounded-t-lg bg-richblack-500">
+        <p className="w-[60%] px-5 py-3">Course Name</p>
+        <p className="w-[20%] px-2 py-3">Price</p>
+        <p className="w-[20%] px-2 py-3">Action</p>
+      </div>
+      
+      {/* Course Items */}
+      {cart.map((course, i, arr) => (
         <div
-          key={index}
-          className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+          className={`flex items-center border border-richblack-700 ${
+            i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"
+          }`}
+          key={i}
         >
-          {/* Thumbnail & Course Info */}
-          <div className="flex items-center space-x-4">
+          {/* Course Name and Info */}
+          <div className="flex w-[60%] items-center gap-4 px-5 py-3">
             <img
               src={course?.thumbnail}
-              alt="CourseThumbnail"
-              className="w-28 h-20 object-cover rounded-lg"
+              alt="course_img"
+              className="h-14 w-14 rounded-lg object-cover"
             />
-            <div>
-              <p className="text-lg font-semibold text-gray-900">{course.courseName}</p>
-              <p className="text-sm text-gray-600">{course?.category?.name}</p>
-              <div className="flex items-center text-yellow-500 text-sm mt-1">
-                <span className="font-medium">4.8</span>
+            <div className="flex flex-col gap-2">
+              <p className="font-semibold">{course.courseName}</p>
+              <div className="flex items-center text-yellow-100 text-xs">
+                <span className="font-medium mr-1">4.8</span>
                 <ReactStars
                   count={5}
-                  size={20}
+                  size={14}
                   edit={false}
                   activeColor="#ffd700"
                   emptyIcon={<IoIosStarOutline />}
                   halfIcon={<IoIosStarHalf />}
                   fullIcon={<IoIosStar />}
                 />
-                <span className="ml-2 text-gray-600">{course?.ratingAndReviews?.length} Ratings</span>
+                <span className="ml-2 text-richblack-300">
+                  ({course?.ratingAndReviews?.length} ratings)
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Price & Remove Button */}
-          <div className="flex items-center space-x-6">
-            <p className="text-lg font-semibold text-blue-600">Rs {course?.price}</p>
+          {/* Price */}
+          <div className="w-[20%] px-2 py-3 text-yellow-50">
+            Rs {course?.price}
+          </div>
+
+          {/* Remove Button */}
+          <div className="w-[20%] px-2 py-3">
             <button
               onClick={() => dispatch(removeFromCart(course._id))}
-              className="flex items-center text-red-500 hover:text-red-700 transition duration-200"
+              className="flex items-center text-pink-300 hover:text-pink-200 transition-all duration-200"
+              title="Remove"
             >
               <RiDeleteBin6Line size={20} />
-              <span className="ml-1 text-sm font-medium">Remove</span>
             </button>
           </div>
         </div>
@@ -60,4 +75,3 @@ function RenderCartCourse() {
 }
 
 export default RenderCartCourse;
-  

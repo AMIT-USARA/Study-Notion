@@ -26,7 +26,7 @@ function DashBoard() {
         </div>
 
 
-        <div className={`z-10  ${open ? 'max-md:hidden h-full' : 'flex h-full'} `}>
+        <div className={`z-10   ${open ? 'max-md:hidden h-full' : 'flex h-full'} `}>
           <Sidebar></Sidebar>
         </div>
 

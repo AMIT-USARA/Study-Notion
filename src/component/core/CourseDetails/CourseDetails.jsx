@@ -7,12 +7,16 @@ import CourseHero from './CourseHero'
 import CourseContent from './CourseContent'
 import CourseSidebar from './CourseSidebar'
 
+
+
+
+
 function CourseDetails() {
     const { courseId } = useParams()
     const [newCourseId, setNewCourseId] = useState("")
     const [courseData, setCourseData] = useState(null)
     const [loading, setLoading] = useState(false)
-
+    const [ConfirmationModal,setConfirmationModal] = useState(null);
     const getCourseDetails = async () => {
         setLoading(true)
         try {
@@ -77,7 +81,7 @@ function CourseDetails() {
                 </div>
                 
                 <div className='lg:w-1/3'>
-                    <CourseSidebar courseData={courseData} />
+                    <CourseSidebar courseData={courseData} ConfirmationModal={ConfirmationModal} setConfirmationModal={setConfirmationModal}/>
                 </div>
             </div>
         </div>

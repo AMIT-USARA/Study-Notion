@@ -49,6 +49,7 @@ const CourseHero = ({ courseData }) => {
             </div>
         </div>
     )
+    
 }
 
 export default CourseHero;
