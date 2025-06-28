@@ -25,7 +25,7 @@ const courseSchema = new mongoose.Schema({
             ref:"Section",
         }
     ],
-    retingAndReviews:[
+    ratingAndReviews:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"RatingAndReview"

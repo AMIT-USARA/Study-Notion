@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaFileCircleCheck } from "react-icons/fa6"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
@@ -8,14 +8,18 @@ import toast from 'react-hot-toast';
 import copy from 'copy-to-clipboard';
 import { addToCart } from '../../../Slices/cartSlice';
 import ConfirmationModal from '../../comman/ConfirmationModal';
+import { getUserEnrolledCourses } from '../../../services/operations/profileAPI';
 const CourseSidebar = ({ courseData }) => {
     const [loading, setLoading] = useState(false);
     const [confirmationModal, setConfirmationModal] = useState(null);
+    const [enrolledCourses, setEnrolledCourses] = useState(null)
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.profile);
     const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const { courseId } = useParams();
+
+    
     const handleBuyCourse = () => {
         if (token) {
             buyCourse(token, [courseId], user, navigate, dispatch);
@@ -38,7 +42,7 @@ const CourseSidebar = ({ courseData }) => {
             return;
         }
         if (token) {
-            console.log("courseData:-",courseData?.data);
+            console.log("courseData:-", courseData?.data);
             dispatch(addToCart(courseData?.data));
             return;
         }
@@ -74,6 +78,33 @@ const CourseSidebar = ({ courseData }) => {
         return `${hours > 0 ? `${hours} hour${hours > 1 ? 's' : ''}` : ''} ${remainingMinutes > 0 ? `${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}` : ''}`.trim()
     }
 
+
+
+    
+
+
+    const getEnrolledCourses = async () => {
+        try {
+            const res = await getUserEnrolledCourses(token);
+            setEnrolledCourses(res);
+        } catch (error) {
+            console.log("Could not fetch enrolled courses.")
+        }
+    };
+    useEffect(() => {
+        getEnrolledCourses();
+    }, [])
+
+    console.log("eccc:-",enrolledCourses);
+    console.log("CDccc:-",courseData);
+
+const isCourseAlreadyEnrolled = () => {
+    if (!enrolledCourses || !courseData?.data?._id) return false;
+    if(enrolledCourses.some(course => course._id === courseData.data._id)) return true;
+    else return false;
+};
+
+
     return (
         <div className='bg-richblack-800 p-6 rounded-lg sticky top-4'>
             {/* Course Thumbnail */}
@@ -89,7 +120,8 @@ const CourseSidebar = ({ courseData }) => {
             </div>
 
             {/* Buttons */}
-            <div className='space-y-3 mb-6'>
+            {!isCourseAlreadyEnrolled() && (
+                <div className='space-y-3 mb-6'>
                 <button onClick={() => handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
                     Buy now
                 </button>
@@ -98,6 +130,21 @@ const CourseSidebar = ({ courseData }) => {
                 </button>
             </div>
 
+    )}
+            {isCourseAlreadyEnrolled() && (
+                <div className='space-y-3 mb-6'>
+                <button onClick={() => {
+                  navigate(
+                    `/view-course/${courseData?.data?._id}/section/${courseData?.data?.courseContent?.[0]?._id}/sub-section/${courseData?.data?.courseContent?.[0]?.subSection?.[0]?._id}`
+                  )
+                }} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
+                    View Course
+                </button>
+                
+            </div>
+
+    )}
+            
             {/* Guarantee */}
             <div className='text-center text-richblack-200 mb-6'>
                 30-Day Money-Back Guarantee
@@ -122,6 +169,7 @@ const CourseSidebar = ({ courseData }) => {
             <button onClick={handleShare} className='w-full mt-6 text-yellow-50 font-semibold py-2 rounded-lg border border-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 transition-all duration-200'>
                 Share
             </button>
+            
 
 
 
