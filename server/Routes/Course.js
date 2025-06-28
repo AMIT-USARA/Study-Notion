@@ -28,6 +28,11 @@ const {createRating,
     getAverageRating,
     getAllRatingReview,} = require("../controllers/RatingAndReview");
 
+const {
+  updateCourseProgress
+} = require("../controllers/courseProgress");
+
+
 const { auth,
     isInstructor,
      isStudent,
@@ -62,6 +67,7 @@ router.post("/editCourse", auth, isInstructor, editCourse)
 // Get all Courses Under a Specific Instructor
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 
+router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)

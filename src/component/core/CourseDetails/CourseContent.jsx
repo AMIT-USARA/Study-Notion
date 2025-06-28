@@ -9,7 +9,7 @@ const CourseContent = ({ courseData }) => {
             <div className='bg-richblack-800 p-6 rounded-lg'>
                 <h2 className='text-2xl font-bold text-richblack-5 mb-4'>What you'll learn</h2>
                 <div className='space-y-3'>
-                    {courseData?.data?.whatYouWillLearn
+                    {courseData?.data?.courseDetails?.whatYouWillLearn
                         ?.split(/\r?\n/)
                         .filter(line => line.trim() !== '')
                         .map((line, index) => (
@@ -25,7 +25,7 @@ const CourseContent = ({ courseData }) => {
             <div className='bg-richblack-800 p-6 rounded-lg'>
                 <h2 className='text-2xl font-bold text-richblack-5 mb-4'>Course Content</h2>
                 <div className='space-y-4'>
-                    {courseData?.data?.courseContent?.map((section, sectionIndex) => (
+                    {courseData?.data?.courseDetails?.courseContent?.map((section, sectionIndex) => (
                         <div key={section._id} className='border border-richblack-600 rounded-lg overflow-hidden'>
                             <button
                                 className={`w-full p-4 text-left flex justify-between items-center ${activeSection === sectionIndex ? 'bg-richblack-700' : 'bg-richblack-800'}`}
@@ -84,20 +84,20 @@ const CourseContent = ({ courseData }) => {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     <div>
                         <h3 className='text-lg font-semibold text-richblack-50 mb-2'>Category</h3>
-                        <p className='text-richblack-100'>{courseData?.data?.category?.name}</p>
+                        <p className='text-richblack-100'>{courseData?.data?.courseDetails?.category?.name}</p>
                     </div>
                     <div>
                         <h3 className='text-lg font-semibold text-richblack-50 mb-2'>Price</h3>
-                        <p className='text-richblack-100'>₹{courseData?.data?.price}</p>
+                        <p className='text-richblack-100'>₹{courseData?.data?.courseDetails?.price}</p>
                     </div>
                     <div>
                         <h3 className='text-lg font-semibold text-richblack-50 mb-2'>Status</h3>
-                        <p className='text-richblack-100 capitalize'>{courseData?.data?.status?.toLowerCase()}</p>
+                        <p className='text-richblack-100 capitalize'>{courseData?.data?.courseDetails?.status?.toLowerCase()}</p>
                     </div>
                     <div>
                         <h3 className='text-lg font-semibold text-richblack-50 mb-2'>Tags</h3>
                         <div className='flex flex-wrap gap-2'>
-                            {courseData?.data?.tags?.map((tag, index) => (
+                            {courseData?.data?.courseDetails?.tags?.map((tag, index) => (
                                 <span key={index} className='bg-richblack-700 text-richblack-100 px-3 py-1 rounded-full text-sm'>
                                     {tag.replace(/[\[\]"]+/g, '')}
                                 </span>
@@ -108,11 +108,11 @@ const CourseContent = ({ courseData }) => {
             </div>
 
             {/* Instructions */}
-            {courseData?.data?.instructions?.length > 0 && (
+            {courseData?.data?.courseDetails?.instructions?.length > 0 && (
                 <div className='bg-richblack-800 p-6 rounded-lg'>
                     <h2 className='text-2xl font-bold text-richblack-5 mb-4'>Instructions</h2>
                     <div className='space-y-3 text-richblack-100'>
-                        {courseData.data.instructions
+                        {courseData?.data?.courseDetails?.instructions
                             .join('\n')
                             .replace(/[\[\]"]+/g, '')
                             .replace(/\\/g, '')

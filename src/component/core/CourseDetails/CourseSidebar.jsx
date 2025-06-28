@@ -42,7 +42,7 @@ const CourseSidebar = ({ courseData }) => {
             return;
         }
         if (token) {
-            console.log("courseData:-", courseData?.data);
+            console.log("courseData:-", courseData?.data?.courseDetails);
             dispatch(addToCart(courseData?.data));
             return;
         }
@@ -62,10 +62,10 @@ const CourseSidebar = ({ courseData }) => {
 
     // Calculate total duration
     const calculateTotalDuration = () => {
-        if (!courseData?.data?.courseContent) return "0 hours"
+        if (!courseData?.data?.courseDetails?.courseContent) return "0 hours"
 
         let totalMinutes = 0
-        courseData.data.courseContent.forEach(section => {
+        courseData?.data?.courseDetails?.courseContent.forEach(section => {
             section.subSection.forEach(sub => {
                 const [minutes, seconds] = sub.timeDuration.split(":").map(Number)
                 totalMinutes += minutes + (seconds / 60)
@@ -99,8 +99,8 @@ const CourseSidebar = ({ courseData }) => {
     console.log("CDccc:-",courseData);
 
 const isCourseAlreadyEnrolled = () => {
-    if (!enrolledCourses || !courseData?.data?._id) return false;
-    if(enrolledCourses.some(course => course._id === courseData.data._id)) return true;
+    if (!enrolledCourses || !courseData?.data?.courseDetails?._id) return false;
+    if(enrolledCourses.some(course => course._id === courseData?.data?.courseDetails?._id)) return true;
     else return false;
 };
 
@@ -109,14 +109,14 @@ const isCourseAlreadyEnrolled = () => {
         <div className='bg-richblack-800 p-6 rounded-lg sticky top-4'>
             {/* Course Thumbnail */}
             <img
-                src={courseData?.data?.thumbnail}
-                alt={courseData?.data?.courseName}
+                src={courseData?.data?.courseDetails?.thumbnail}
+                alt={courseData?.data?.courseDetails?.courseName}
                 className='w-full h-48 object-cover rounded-lg mb-4'
             />
 
             {/* Price */}
             <div className='text-3xl font-bold mb-4'>
-                ₹ {courseData?.data?.price}
+                ₹ {courseData?.data?.courseDetails?.price}
             </div>
 
             {/* Buttons */}
@@ -135,7 +135,7 @@ const isCourseAlreadyEnrolled = () => {
                 <div className='space-y-3 mb-6'>
                 <button onClick={() => {
                   navigate(
-                    `/view-course/${courseData?.data?._id}/section/${courseData?.data?.courseContent?.[0]?._id}/sub-section/${courseData?.data?.courseContent?.[0]?.subSection?.[0]?._id}`
+                    `/view-course/${courseData?.data?.courseDetails?._id}/section/${courseData?.data?.courseDetails?.courseContent?.[0]?._id}/sub-section/${courseData?.data?.courseDetails?.courseContent?.[0]?.subSection?.[0]?._id}`
                   )
                 }} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
                     View Course
