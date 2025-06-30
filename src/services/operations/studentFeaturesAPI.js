@@ -7,7 +7,7 @@ import { resetCart } from "../../Slices/cartSlice";
 
 const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY
 
-console.log("R_K",RAZORPAY_KEY);
+// console.log("R_K",RAZORPAY_KEY);
 
 const {COURSE_PAYMENT_API, COURSE_VERIFY_API, SEND_PAYMENT_SUCCESS_EMAIL_API} = studentEndpoints;
 
@@ -48,7 +48,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         if(!orderResponse.data.success) {
             throw new Error(orderResponse.data.message);
         }
-        console.log("PRINTING orderResponse", orderResponse);
+        // console.log("PRINTING orderResponse", orderResponse);
         //options
         const options = {
             key: RAZORPAY_KEY,
