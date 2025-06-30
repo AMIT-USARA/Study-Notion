@@ -22,7 +22,7 @@ exports.auth= (req,res,next)=>{
 
         try{
             const decode = jwt.verify(token,process.env.JWT_SECRET);
-            console.log(decode);
+            // console.log(decode);
             req.user = decode;
             
         } catch(error){

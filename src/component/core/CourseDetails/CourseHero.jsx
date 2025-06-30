@@ -5,7 +5,7 @@ import GetAvgRating from "../../../utils/avgRating"
 const CourseHero = ({ courseData }) => {
   const course = courseData?.data?.courseDetails
   const avgReviewCount = GetAvgRating(course?.ratingAndReviews)
-    console.log("course -=",course)
+    // console.log("course -=",course)
   return (
     <div className="bg-richblack-800">
       <div className="mx-auto w-11/12 max-w-maxContent py-8">
@@ -15,7 +15,7 @@ const CourseHero = ({ courseData }) => {
           <span>/</span>
           <span>Learning</span>
           <span>/</span>
-          {console.log("course",course)}
+          {/* {console.log("course",course)} */}
           <span className="text-yellow-50">{course?.category?.name}</span>
         </div>
 

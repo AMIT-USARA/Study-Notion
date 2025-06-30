@@ -14,7 +14,7 @@ exports.updateCourseProgress = async(req,res) => {
             return res.status(404).json({error:"Invalid SUbSection"});
         }
 
-        console.log("SubSection Validation Done");
+        // console.log("SubSection Validation Done");
 
         //check for old entry 
         let courseProgress = await CourseProgress.findOne({
@@ -28,7 +28,7 @@ exports.updateCourseProgress = async(req,res) => {
             });
         }
         else {
-            console.log("Course Progress Validation Done");
+            // console.log("Course Progress Validation Done");
             //check for re-completing video/subsection
             if(courseProgress.completedVideos.includes(subSectionId)) {
                 return res.status(400).json({
@@ -38,10 +38,10 @@ exports.updateCourseProgress = async(req,res) => {
 
             //poush into completed video
             courseProgress.completedVideos.push(subSectionId);
-            console.log("Copurse Progress Push Done");
+            // console.log("Copurse Progress Push Done");
         }
         await courseProgress.save();
-        console.log("Course Progress Save call Done");
+        // console.log("Course Progress Save call Done");
         return res.status(200).json({
             success:true,
             message:"Course Progress Updated Successfully",

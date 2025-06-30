@@ -9,7 +9,7 @@ async function getCatalogaPageData(categoryId) {
     try {
         const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API, { categoryId: categoryId });
 
-        console.log("CATALOG page DATA API response.....", response);
+       // console.log("CATALOG page DATA API response.....", response);
 
 
 
@@ -20,7 +20,7 @@ async function getCatalogaPageData(categoryId) {
         result = response?.data;
     }
     catch (error) {
-        console.log("CATALOG page DATA API ERROR.....", error);
+       // console.log("CATALOG page DATA API ERROR.....", error);
         result = error.response?.data;
     }
     toast.dismiss(toastId);

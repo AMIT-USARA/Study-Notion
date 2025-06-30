@@ -15,9 +15,9 @@ function AllCourses() {
       } else {
         setAllCourses([]);
       }
-      console.log("response getAllCourses:-", response);
+      // console.log("response getAllCourses:-", response);
     } catch (error) {
-      console.log("Unable to Fetch All Courses.");
+      // console.log("Unable to Fetch All Courses.");
       setAllCourses([]);
     }
   }, []);

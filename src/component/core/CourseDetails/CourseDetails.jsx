@@ -24,6 +24,7 @@ function CourseDetails() {
             setCourseData(res)
         } catch (error) {
             console.log(error)
+            
         } finally {
             setLoading(false)
         }
@@ -34,12 +35,13 @@ function CourseDetails() {
             const res = await apiConnector("GET", courseEndpoints.GET_ALL_COURSE_API)
             const course_id = res?.data?.data?.find(ct => ct._id === courseId)?._id
             if (!course_id) {
-                console.error("Course not found with ID:", courseId)
+                // console.error("Course not found with ID:", courseId)
                 return
             }
             setNewCourseId(course_id)
         } catch (error) {
             console.error("Failed to fetch courses:", error)
+           
         }
     }
 

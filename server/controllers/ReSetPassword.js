@@ -68,7 +68,7 @@ exports.resetPassword = async(req,res) =>{
         //getuserdetails from db using token 
         
         const userDetails = await User.findOne({token:token});
-        console.log("user details :- : ",userDetails);
+        // console.log("user details :- : ",userDetails);
 
         // if no entry - invalide token 
         
@@ -87,8 +87,8 @@ exports.resetPassword = async(req,res) =>{
                 message:'Your Token is Expired,please regenrate your token.',
             });
         }
-        console.log(userDetails.resetPasswordExpires);
-        console.log(Date.now());
+        // console.log(userDetails.resetPasswordExpires);
+        // console.log(Date.now());
         // hash pwd
 
 

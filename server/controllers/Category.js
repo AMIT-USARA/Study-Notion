@@ -1,6 +1,5 @@
 const path = require('path');
 const Category = require("../models/categorym");
-const { default: toast } = require("react-hot-toast");
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max)
@@ -131,7 +130,7 @@ exports.categoryPageDetails = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Error in categoryPageDetails:", error);
+   // console.error("Error in categoryPageDetails:", error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -148,17 +147,17 @@ exports.categoryPageDetails = async (req, res) => {
 // 		const selectedCategory = await Category.findById(categoryId)
 // 			.populate("courses")
 // 			.exec();
-// 		console.log(selectedCategory);
+// 	//	console.log(selectedCategory);
 // 		// Handle the case when the category is not found
 // 		if (!selectedCategory) {
-// 			console.log("Category not found.");
+// 		//	console.log("Category not found.");
 // 			return res
 // 				.status(404)
 // 				.json({ success: false, message: "Category not found" });
 // 		}
 // 		// Handle the case when there are no courses
 // 		if (selectedCategory.courses.length === 0) {
-// 			console.log("No courses found for the selected category.");
+// 		//	console.log("No courses found for the selected category.");
 // 			return res.status(404).json({
 // 				success: false,
 // 				message: "No courses found for the selected category.",

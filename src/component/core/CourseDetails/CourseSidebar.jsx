@@ -19,7 +19,7 @@ const CourseSidebar = ({ courseData }) => {
     const dispatch = useDispatch();
     const { courseId } = useParams();
 
-    
+
     const handleBuyCourse = () => {
         if (token) {
             buyCourse(token, [courseId], user, navigate, dispatch);
@@ -42,7 +42,7 @@ const CourseSidebar = ({ courseData }) => {
             return;
         }
         if (token) {
-            console.log("courseData:-", courseData?.data?.courseDetails);
+           // console.log("courseData:-", courseData?.data?.courseDetails);
             dispatch(addToCart(courseData?.data));
             return;
         }
@@ -80,7 +80,7 @@ const CourseSidebar = ({ courseData }) => {
 
 
 
-    
+
 
 
     const getEnrolledCourses = async () => {
@@ -88,21 +88,21 @@ const CourseSidebar = ({ courseData }) => {
             const res = await getUserEnrolledCourses(token);
             setEnrolledCourses(res);
         } catch (error) {
-            console.log("Could not fetch enrolled courses.")
+           // console.log("Could not fetch enrolled courses.")
         }
     };
     useEffect(() => {
         getEnrolledCourses();
     }, [])
 
-    console.log("eccc:-",enrolledCourses);
-    console.log("CDccc:-",courseData);
+   // console.log("eccc:-", enrolledCourses);
+   // console.log("CDccc:-", courseData);
 
-const isCourseAlreadyEnrolled = () => {
-    if (!enrolledCourses || !courseData?.data?.courseDetails?._id) return false;
-    if(enrolledCourses.some(course => course._id === courseData?.data?.courseDetails?._id)) return true;
-    else return false;
-};
+    const isCourseAlreadyEnrolled = () => {
+        if (!enrolledCourses || !courseData?.data?.courseDetails?._id) return false;
+        if (enrolledCourses.some(course => course._id === courseData?.data?.courseDetails?._id)) return true;
+        else return false;
+    };
 
 
     return (
@@ -122,29 +122,29 @@ const isCourseAlreadyEnrolled = () => {
             {/* Buttons */}
             {!isCourseAlreadyEnrolled() && (
                 <div className='space-y-3 mb-6'>
-                <button onClick={() => handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900  py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
-                    Buy now
-                </button>
-                <button onClick={handleAddToCart} className='w-full bg-richblack-700 text-richblack-5 py-2 rounded-lg font-semibold hover:bg-richblack-600 transition-all duration-200'>
-                    Add to Cart
-                </button>
-            </div>
+                    <button onClick={() => handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900  py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
+                        Buy now
+                    </button>
+                    <button onClick={handleAddToCart} className='w-full bg-richblack-700 text-richblack-5 py-2 rounded-lg font-semibold hover:bg-richblack-600 transition-all duration-200'>
+                        Add to Cart
+                    </button>
+                </div>
 
-    )}
+            )}
             {isCourseAlreadyEnrolled() && (
                 <div className='space-y-3 mb-6'>
-                <button onClick={() => {
-                  navigate(
-                    `/view-course/${courseData?.data?.courseDetails?._id}/section/${courseData?.data?.courseDetails?.courseContent?.[0]?._id}/sub-section/${courseData?.data?.courseDetails?.courseContent?.[0]?.subSection?.[0]?._id}`
-                  )
-                }} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
-                    View Course
-                </button>
-                
-            </div>
+                    <button onClick={() => {
+                        navigate(
+                            `/view-course/${courseData?.data?.courseDetails?._id}/section/${courseData?.data?.courseDetails?.courseContent?.[0]?._id}/sub-section/${courseData?.data?.courseDetails?.courseContent?.[0]?.subSection?.[0]?._id}`
+                        )
+                    }} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
+                        View Course
+                    </button>
 
-    )}
-            
+                </div>
+
+            )}
+
             {/* Guarantee */}
             <div className='text-center text-richblack-200 mb-6'>
                 30-Day Money-Back Guarantee
@@ -169,7 +169,7 @@ const isCourseAlreadyEnrolled = () => {
             <button onClick={handleShare} className='w-full mt-6 text-yellow-50 font-semibold py-2 rounded-lg border border-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 transition-all duration-200'>
                 Share
             </button>
-            
+
 
 
 

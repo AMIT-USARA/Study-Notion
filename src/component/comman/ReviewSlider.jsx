@@ -21,13 +21,13 @@ function ReviewSlider() {
     useEffect(() => {
         const fetchAllReviews = async () => {
             const { data } = await apiConnector("GET", ratingsEndpoints.REVIEWS_DETAILS_API)
-            console.log("LOgging response in rating", data?.data?.highRatingReviews);
+           // console.log("LOgging response in rating", data?.data?.highRatingReviews);
 
             if (data?.success) {
                 setReviews(data?.data?.highRatingReviews);
             }
 
-            console.log("Printing Reviews", reviews);
+           // console.log("Printing Reviews", reviews);
 
         }
         fetchAllReviews();
@@ -36,7 +36,7 @@ function ReviewSlider() {
 
     return (
         <div className='text-center w-9/12 mb-24'>
-            <p className='text-3xl '>some reviews from other Learners.</p>
+            <p className='text-3xl '>Reviews from other learners</p>
             <div className='text-white mt-10'>
 
                 <div className='h-[190px] max-w-maxContent'>

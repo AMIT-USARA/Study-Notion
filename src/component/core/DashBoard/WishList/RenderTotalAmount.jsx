@@ -21,7 +21,7 @@ function RenderTotalAmount() {
 
     // Correctly extract course IDs
     const courses = cart.map((course) => course._id);
-    console.log("Buying Courses:", courses);
+    // console.log("Buying Courses:", courses);
 
     // Call buyCourse function
     buyCourse(token, courses, user, navigate, dispatch);
