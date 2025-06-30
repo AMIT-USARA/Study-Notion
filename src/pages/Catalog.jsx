@@ -19,7 +19,7 @@ function Catalog() {
             const res = await getCatalogaPageData(categoryId)
             setCatalogPageData(res)
         } catch (error) {
-           // console.log(error)
+           console.log(error)
         }
     }
 
@@ -112,7 +112,7 @@ function Catalog() {
                     <h2 className='text-2xl font-bold mb-8'>
                         Courses in Other Category
                     </h2> 
-                    //{console.log("coursedadadda:-",catalogPageData?.data)}
+                    {/* {console.log("coursedadadda:-",catalogPageData?.data)} */}
                     <CourseSlider
                         Courses={catalogPageData?.data?.differentCourses}
                     />

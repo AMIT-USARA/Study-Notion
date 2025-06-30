@@ -3,10 +3,13 @@ import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import frameImage from '../../../assets/Images/frame.png'
 import { FcGoogle } from 'react-icons/fc'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Template = ({ title, desc1, desc2, image, formtype }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.auth)
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
@@ -29,9 +32,21 @@ const Template = ({ title, desc1, desc2, image, formtype }) => {
               <p className='font-medium leading-[1.375rem] text-richblack-700'>OR</p>
               <div className='bg-richblack-700 w-full h-[1px]'></div>
             </div>
+
             <button className='w-full text-white flex justify-center items-center rounded-[8px] font-medium to-richblack-100 border border-richblack-700 px-[12px] py-[8px] gap-x-2 mt-6'>
-              <FcGoogle></FcGoogle>
-              <p>Sign in With Google</p></button>
+
+              {formtype === 'signup' ? (<div className='flex'>
+                <p>If you already have an account, please click <Link to={"/login"} className='text-yellow-5 underline font-bold text-[8px] '>
+                  - Here.
+                </Link></p>
+                
+              </div>) : (<div className='flex font-bold'>
+                <p>If you don't have an account, please click <Link to={"/signup"} className='text-yellow-5 underline font-bold text-[8px] '>
+                  - Here.
+                </Link></p>
+                
+              </div>)}
+            </button>
           </div>
           <div className='relative lg:block hidden w-11/12 max-w-[450px]'>
             <img src={frameImage}
@@ -49,8 +64,8 @@ const Template = ({ title, desc1, desc2, image, formtype }) => {
           </div>
         </div>
       )}
-      </div>
-      )
-      }
+    </div>
+  )
+}
 
-      export default Template
+export default Template
