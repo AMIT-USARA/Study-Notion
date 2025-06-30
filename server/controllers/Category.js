@@ -1,4 +1,4 @@
-const path = require("path-browserify");
+const path = require('path');
 const Category = require("../models/categorym");
 const { default: toast } = require("react-hot-toast");
 
