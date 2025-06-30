@@ -126,7 +126,7 @@ export function login(email, password, navigate) {
       localStorage.setItem("user", JSON.stringify({ ...user, image: userImage }));
 
       // Navigate to dashboard
-      navigate("/dashboard/my-profile");
+      navigate("/dashboard/instructor");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
       toast.error(error.response?.data?.message || "Login Failed");

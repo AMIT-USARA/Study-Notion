@@ -27,6 +27,7 @@ import Catalog from "./pages/Catalog";
 import CourseDetails from "./component/core/CourseDetails/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from './component/core/ViewCourse/VideoDetails'
+import Instructor from "./component/core/DashBoard/InstructorDashboard/Instructor";
 function App() {
   const { user } = useSelector((state) => state.auth);
   return (
@@ -83,9 +84,8 @@ function App() {
         <Route
           path="about"
           element={
-            <OpenRoute>
               <About />
-            </OpenRoute>
+            
           }
         />
         <Route
@@ -112,6 +112,7 @@ function App() {
           {
             user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
               <>
+                <Route path="dashboard/instructor" element={<Instructor />} />
                 <Route path="dashboard/my-courses" element={<ProtectedRoute> <MyCourses /> </ProtectedRoute>} />
                 <Route path="dashboard/add-course" element={<ProtectedRoute> <AddCourse /> </ProtectedRoute>} />
                 <Route path="dashboard/edit-course/:courseId" element={<ProtectedRoute> <EditCourse /> </ProtectedRoute>} />

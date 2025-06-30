@@ -4,6 +4,7 @@ import { IoMdChatbubbles } from "react-icons/io";
 import { IoMdGlobe } from "react-icons/io";
 import { MdLocalPhone } from "react-icons/md";
 import Footer from '../component/comman/footer';
+import ReviewSlider from '../component/comman/ReviewSlider';
 
 
 function ContectUs() {
@@ -61,6 +62,9 @@ function ContectUs() {
       </div>
         
       </div>
+      <div className='flex w-full items-center justify-center'>
+          <ReviewSlider></ReviewSlider>
+        </div>
       <Footer></Footer>
     </div>
   )

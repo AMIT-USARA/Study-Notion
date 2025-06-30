@@ -16,10 +16,10 @@ function IconBtn(
     onClick={onClick}
     disabled={disabled}
     type={type}
-    className={`text-black ${active ? "bg-yellow-50":"bg-pure-greys-200"}  py-2 font-medium text-xl px-4 rounded-lg`}  >
+    className={`text-black ${active ? "bg-yellow-50":"bg-pure-greys-200"} ${customClasses} py-2 font-medium text-xl px-4 rounded-lg`}  >
       {
         children ? (
-            <div className='flex justify-center items-center gap-1  '>
+            <div className={`flex justify-center items-center gap-1  `}>
                 <p className=''>  
                     
                         {text}

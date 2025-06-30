@@ -3,18 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import IconBtn from "../../../comman/IconBtn";
 import { buyCourse } from "../../../../services/operations/studentFeaturesAPI";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
 function RenderTotalAmount() {
   const { total, cart } = useSelector((state) => state.cart);
-const { token } = useSelector((state) => state.auth)
-  const { user } = useSelector((state) => state.profile)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleBuyCourse = () => {
-    const courses = cart.map((course) => course._id)
-    buyCourse(token, courses, user, navigate, dispatch)
-  }
+    // Prevent buying if cart is empty
+    if (!cart.length) {
+      toast.error("Cart is empty");
+      return;
+    }
 
+    // Correctly extract course IDs
+    const courses = cart.map((course) => course._id);
+    console.log("Buying Courses:", courses);
+
+    // Call buyCourse function
+    buyCourse(token, courses, user, navigate, dispatch);
+  };
 
   return (
     <div className="mt-8 p-6 bg-richblack-800 rounded-lg border border-richblack-700">

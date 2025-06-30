@@ -106,7 +106,7 @@ const isCourseAlreadyEnrolled = () => {
 
 
     return (
-        <div className='bg-richblack-800 p-6 rounded-lg sticky top-4'>
+        <div className='bg-richblack-800 p-6 rounded-lg sticky top-4 '>
             {/* Course Thumbnail */}
             <img
                 src={courseData?.data?.courseDetails?.thumbnail}
@@ -122,7 +122,7 @@ const isCourseAlreadyEnrolled = () => {
             {/* Buttons */}
             {!isCourseAlreadyEnrolled() && (
                 <div className='space-y-3 mb-6'>
-                <button onClick={() => handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900 py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
+                <button onClick={() => handleBuyCourse()} className='w-full bg-yellow-50 text-richblack-900  py-2 rounded-lg font-semibold hover:bg-yellow-25 transition-all duration-200'>
                     Buy now
                 </button>
                 <button onClick={handleAddToCart} className='w-full bg-richblack-700 text-richblack-5 py-2 rounded-lg font-semibold hover:bg-richblack-600 transition-all duration-200'>

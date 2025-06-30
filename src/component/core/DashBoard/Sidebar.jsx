@@ -9,8 +9,11 @@ import ConfirmationModal from "../../comman/ConfirmationModal"
 import SidebarLink from "./SidebarLink"
 
 export default function Sidebar() {
-  const { user, loading: profileLoading } = useSelector(
+  const { loading: profileLoading } = useSelector(
     (state) => state.profile
+  )
+  const { user } = useSelector(
+    (state) => state.auth
   )
   const { loading: authLoading } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
@@ -32,6 +35,7 @@ export default function Sidebar() {
         <div className="flex flex-col">
           {sidebarLinks.map((link) => {
             if (link.type && user?.accountType !== link.type) return null
+            console.log(user?.accountType);
             return (
               <SidebarLink key={link.id} link={link} iconName={link.icon} />
             )

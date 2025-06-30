@@ -106,18 +106,35 @@ function Catalog() {
                     />
                 </section>
 
-                {/* Section 2: Top Courses in Category */}
+                {/* Section 2: Courses in Other Category */}
                 <section className='mb-16'>
+                    
                     <h2 className='text-2xl font-bold mb-8'>
+                        Courses in Other Category
+                    </h2> 
+                    {console.log("coursedadadda:-",catalogPageData?.data)}
+                    <CourseSlider
+                        Courses={catalogPageData?.data?.differentCourses}
+                    />
+                </section>
+
+
+
+                {/* Section 2: Top Courses in Category */}
+                {/* <section className='mb-16'>
+                    
+                    
+                    
+                     <h2 className='text-2xl font-bold mb-8'>
                         Top courses in{' '}
                         <span className='text-yellow-50'>
                             {catalogPageData?.data?.selectedCategory?.name}
                         </span>
-                    </h2>
+                    </h2> 
                     <CourseSlider
                         Courses={catalogPageData?.data?.differentCategory?.courses}
                     />
-                </section>
+                </section> */}
 
                 {/* Section 3: Frequently Bought */}
                 <section className='mb-16'>

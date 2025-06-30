@@ -97,6 +97,7 @@ const CourseContent = ({ courseData }) => {
                     <div>
                         <h3 className='text-lg font-semibold text-richblack-50 mb-2'>Tags</h3>
                         <div className='flex flex-wrap gap-2'>
+                            {console.log(courseData?.data?.courseDetails)}
                             {courseData?.data?.courseDetails?.tags?.map((tag, index) => (
                                 <span key={index} className='bg-richblack-700 text-richblack-100 px-3 py-1 rounded-full text-sm'>
                                     {tag.replace(/[\[\]"]+/g, '')}

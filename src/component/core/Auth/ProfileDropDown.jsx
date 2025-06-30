@@ -56,14 +56,22 @@ export default function ProfileDropdown() {
       {open && (
         <div className="absolute top-[118%] mt-1 right-0 z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-richblack-800 flex flex-col gap-1 py-2 transition-all opacity-100">
           <div className="flex flex-col gap-1">
+            {user?.accountType !== "Student"?
             <Link
+              to="/dashboard/instructor"
+              className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:text-richblack-25 transition-all"
+              onClick={() => setOpen(false)} // Close dropdown when link clicked
+            >
+              <VscDashboard className="text-lg" />
+              Dashboard
+            </Link> : <Link
               to="/dashboard/my-profile"
               className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:text-richblack-25 transition-all"
               onClick={() => setOpen(false)} // Close dropdown when link clicked
             >
               <VscDashboard className="text-lg" />
               Dashboard
-            </Link>
+            </Link>}
             <button
               onClick={() => {
                 dispatch(logout(navigate)); // Dispatch logout action

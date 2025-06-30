@@ -12,7 +12,7 @@ export default function AddCourse() {
                     
                 </div>
                 <div className="border-richblack-700 bg-richblack-800 p-6 rounded-xl h-[35vh] w-auto">
-                    <p>Code Upload Tips</p>
+                    <p>⚡ Code Upload Tips</p>
                     <ul>
                         <li>Set the Course Price option or make it free.</li>
                         <li>Standard size for the course thumbnail is 1024x576.</li>

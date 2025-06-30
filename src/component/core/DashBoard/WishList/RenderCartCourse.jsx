@@ -9,6 +9,13 @@ function RenderCartCourse() {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  // ✅ Helper function to calculate average rating
+  const averageRating = (reviews) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((sum, r) => sum + r.rating, 0);
+    return (total / reviews.length).toFixed(1);
+  };
+
   return (
     <div className="space-y-4">
       {/* Headings */}
@@ -17,7 +24,7 @@ function RenderCartCourse() {
         <p className="w-[20%] px-2 py-3">Price</p>
         <p className="w-[20%] px-2 py-3">Action</p>
       </div>
-      
+
       {/* Course Items */}
       {cart.map((course, i, arr) => (
         <div
@@ -29,25 +36,29 @@ function RenderCartCourse() {
           {/* Course Name and Info */}
           <div className="flex w-[60%] items-center gap-4 px-5 py-3">
             <img
-              src={course?.thumbnail}
+              src={course.thumbnail}
               alt="course_img"
               className="h-14 w-14 rounded-lg object-cover"
             />
             <div className="flex flex-col gap-2">
               <p className="font-semibold">{course.courseName}</p>
               <div className="flex items-center text-yellow-100 text-xs">
-                <span className="font-medium mr-1">4.8</span>
+                {/* ✅ Fixed: Use average rating */}
+                <span className="font-medium mr-1">
+                  {averageRating(course.ratingAndReviews)}
+                </span>
                 <ReactStars
                   count={5}
                   size={14}
                   edit={false}
+                  value={parseFloat(averageRating(course.ratingAndReviews))}
                   activeColor="#ffd700"
                   emptyIcon={<IoIosStarOutline />}
                   halfIcon={<IoIosStarHalf />}
                   fullIcon={<IoIosStar />}
                 />
                 <span className="ml-2 text-richblack-300">
-                  ({course?.ratingAndReviews?.length} ratings)
+                  ({course.ratingAndReviews?.length || 0} ratings)
                 </span>
               </div>
             </div>
@@ -55,7 +66,7 @@ function RenderCartCourse() {
 
           {/* Price */}
           <div className="w-[20%] px-2 py-3 text-yellow-50">
-            Rs {course?.price}
+            Rs {course.price}
           </div>
 
           {/* Remove Button */}

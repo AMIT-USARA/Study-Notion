@@ -65,7 +65,7 @@ export function updateProfile(token, formData,navigate) {
         throw new Error(response.data.message);
       }
 
-      const updatedUserDetails = response.data.profileDetails;
+      const updatedUserDetails = response.data.profile;
       console.log("updatedUserDetails:---", updatedUserDetails);
       if (!updatedUserDetails) {
         throw new Error("Updated user details are not available.");

@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { getAllCourses } from "../../../services/operations/profileAPI";
 import { Link } from "react-router-dom";
+import GetAvgRating from "../../../utils/avgRating";
+import RatingStars from "../../comman/RatingStars";
 
 function AllCourses() {
   const [allCourses, setAllCourses] = useState([]);
@@ -23,6 +25,10 @@ function AllCourses() {
   useEffect(() => {
     getAllCoursesData();
   }, [getAllCoursesData]);
+
+
+
+
 
   return (
     <div className="w-full space-y-8 p-5 md:p-10">
@@ -77,7 +83,9 @@ function AllCourses() {
                       </span>
                     </p>
                     <p className="text-yellow-100 text-sm">
-                      Rating: {course.ratingAndReviews?.rating || "N/A"}
+
+                      Rating: {" "}
+                      
                     </p>
                     <p className="text-sm text-richblack-300">
                       Students Enrolled: {course.studentsEnrolled.length}
@@ -98,7 +106,7 @@ function AllCourses() {
 
                   {/* Actions */}
                   <td className="col-span-2 flex items-center justify-center gap-4">
-                    
+
                     <Link
                       to={`/courses/${course._id}`}
                       className="text-richblack-100 hover:underline text-sm"

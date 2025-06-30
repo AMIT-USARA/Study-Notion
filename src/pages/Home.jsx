@@ -7,10 +7,11 @@ import TagSection from '../component/core/HomePage/TagSection';
 import TimeLineSection from '../component/core/HomePage/TimeLineSection.jsx';
 import LearningCycleSection from '../component/core/HomePage/LearningCycleSection.jsx';
 import InstructorSection from '../component/core/HomePage/InstructorSection.jsx'
+import ReviewSlider from '../component/comman/ReviewSlider.jsx'
 import Footer from "../component/comman/footer.jsx";
 function Home() {
     return (
-        <div className='items-center bg-richblack-900 text-white flex flex-col overflow-x-hidden'>
+        <div className='items-center w-full bg-richblack-900 text-white flex flex-col overflow-x-hidden'>
           <BannerSection/>
           
           <CodeSection1/>
@@ -25,6 +26,8 @@ function Home() {
 
           <InstructorSection/>
 
+          <ReviewSlider/>
+          
           <Footer/>
       </div>
     )

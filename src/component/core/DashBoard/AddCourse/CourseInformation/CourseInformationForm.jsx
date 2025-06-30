@@ -68,8 +68,7 @@ const CourseInformationForm = () => {
 
   const onSubmit = async (data) => {
 
-
-console.log("catagory :-", data.courseCategory);
+console.log(JSON.stringify(data.courseTags));
 
     const formData = new FormData();
 
@@ -81,6 +80,9 @@ console.log("catagory :-", data.courseCategory);
     formData.append("category", data.courseCategory);
     formData.append("instructions", JSON.stringify(data.courseRequirements));
     formData.append("status", COURSE_STATUS.DRAFT);
+
+
+
 
 
     if (data.thumbnail instanceof File) {

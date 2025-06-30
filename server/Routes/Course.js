@@ -68,7 +68,6 @@ router.post("/editCourse", auth, isInstructor, editCourse)
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 
 router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
-
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)
 // ********************************************************************************************************

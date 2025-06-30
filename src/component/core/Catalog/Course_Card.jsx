@@ -4,18 +4,18 @@ import RatingStars from "../../comman/RatingStars"
 import GetAvgRating from "../../../utils/avgRating"
 
 function Course_Card({ course, Height }) {
-  const [avgReviewCount, setAvgReviewCount] = useState(0)
 
-  useEffect(() => {
-    const count = GetAvgRating(course.ratingAndReviews)
-    setAvgReviewCount(count)
-  }, [course])
+
+  // console.log("course cart", course)
+  let avgReviewCount = GetAvgRating(course.ratingAndReviews);
+
+
 
   return (
     <div className="text-richblack-5 hover:scale-95 transition-all duration-200">
       <Link to={`/courses/${course._id}`} className="group">
         <div className="flex flex-col gap-3 rounded-lg overflow-hidden bg-richblack-800 group-hover:shadow-[0_4px_16px_rgba(0,0,0,0.6)] transition-shadow duration-200">
-          
+
           {/* Thumbnail */}
           <div className="relative">
             <img
@@ -28,7 +28,7 @@ function Course_Card({ course, Height }) {
 
           {/* Course Details */}
           <div className="p-4 flex flex-col gap-3">
-            
+
             {/* Title */}
             <h3 className="font-medium text-lg line-clamp-2">
               {course?.courseName}
@@ -49,7 +49,6 @@ function Course_Card({ course, Height }) {
                 ({course?.ratingAndReviews?.length || 0} ratings)
               </span>
             </div>
-
             {/* Price */}
             <div className="flex items-center gap-2">
               <span className="text-xl font-bold text-yellow-50">

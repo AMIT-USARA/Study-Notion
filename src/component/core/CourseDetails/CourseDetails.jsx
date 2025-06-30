@@ -72,16 +72,17 @@ function CourseDetails() {
     }
 
     return (
-        <div className='bg-richblack-900 text-richblack-5 min-h-screen'>
+        <div className='bg-richblack-900 text-richblack-5 min-h-screen relative'>
             <CourseHero courseData={courseData} />
             
             <div className='mx-auto w-11/12 max-w-maxContent py-8 flex flex-col lg:flex-row gap-10'>
-                <div className='lg:w-2/3 space-y-6'>
-                    <CourseContent courseData={courseData} />
-                </div>
                 
-                <div className='lg:w-1/3'>
+                
+                <div className='xl:w-1/4 md:absolute top-4 2xl:right-[10%] md:right-[5%]'>
                     <CourseSidebar courseData={courseData} ConfirmationModal={ConfirmationModal} setConfirmationModal={setConfirmationModal}/>
+                </div>
+                <div className='xl:w-2/3 space-y-6 md:w-2/4'>
+                    <CourseContent courseData={courseData} />
                 </div>
             </div>
         </div>
@@ -89,3 +90,15 @@ function CourseDetails() {
 }
 
 export default CourseDetails
+
+
+
+
+
+
+
+
+
+
+
+
