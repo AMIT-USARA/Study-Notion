@@ -1,9 +1,7 @@
 
-import { config } from '../config';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const { BASE_URL } = config;
-
-
+console.log(BASE_URL)
 
 
 // AUTH ENDPOINTS`
