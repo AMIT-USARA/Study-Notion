@@ -9,7 +9,7 @@ function LearningCycleSection() {
     return (
         <div className='w-full flex flex-col gap-[52px] max-xl:pt-[90px] items-center bg-[#F9F9F9]'>
             <div className="h-[230px] max-550:w-11/12 w-11/12 md:h-[120px] md:w-10/12  text-[#000814] flex  flex-col items-center justify-evenly md:justify-between">
-                <div className=' max-550:w-full w-[540px] max-550:text-start md:w-[750px] max-550:text-[30px] h-[44px] text-[36px] leading-[38px]  min-550:leading-[44px] text-center font-semibold'>Your swiss knife for <HighlightText text=" learning any language"></HighlightText></div>
+                <div className=' max-550:w-full w-[540px] max-550:text-start md:w-[750px] max-430:text-[24px] text-[30px] h-[44px] sm:text-[36px] leading-[38px]  min-550:leading-[44px] text-center font-semibold'>Your swiss knife for <HighlightText text=" learning any language"></HighlightText></div>
                 <div className=' max-550:text-start md:w-[710px] min-550:h-[48px] text-[16px] leading-[24px] font-medium text-[#2C333F] text-center'>Using spin making learning multiple languages easy. with 20+ languages realistic voice-over, progress tracking, custom schedule and more.</div>
             </div>
             <div className=" relative lg:w-[1102.49px] h-[468.97px] max-md:h-[900px] w-11/12 flex max-md:flex-col md:justify-evenly lg:justify-center items-center">

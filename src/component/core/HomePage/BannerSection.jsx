@@ -19,7 +19,7 @@ function BannerSection() {
                     </Link>
                 </div>
                 <div className='lg:w-[913px] md:h-[140px] h-auto lg:h-[108px] flex justify-between flex-col '>
-                  <div className='  text-[30px] max-sm:h-[90px] md:h-[44px] md:text-[36px] leading-[44px] min-550:font-semibold md:text-center sm:text-left text-[#F1F2FF]'>Empower Your Future with <HighlightText text="Coding Skills"/></div>
+                  <div className='max-430:text-[24px]  text-[30px] max-sm:h-[90px] md:h-[44px] md:text-[36px] leading-[44px] min-550:font-semibold md:text-center sm:text-left text-[#F1F2FF]'>Empower Your Future with <HighlightText text="Coding Skills"/></div>
                   <div className='md:w-full lg:h-[48px] md:text-[16px] md:leading-[24px] md:px-[30px] md:font-medium text-[#838894] md:text-center'>
                   With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors. 
                   </div>

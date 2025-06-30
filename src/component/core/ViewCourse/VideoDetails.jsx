@@ -27,7 +27,7 @@ const VideoDetails = () => {
     const setVideoSpecificDetails = async () => {
       if (!courseSectionData.length)
         return;
-      if (!courseId && !sectionId && !subSectionId) {
+      if (!courseId && !sectionId && !subSectionId && token) {
         navigate("/dashboard/enrolled-courses");
       }
       else {

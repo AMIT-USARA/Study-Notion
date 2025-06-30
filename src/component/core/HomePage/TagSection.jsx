@@ -37,7 +37,7 @@ function TagSection() {
       <div className='lg:px-[50px] max-sm:px-[20px] max-430:px-0 xl:px-[120px] lg:pt-[90px] flex flex-col gap-[98px] w-full'>
         <div className=' relative flex-col gap-[98px]  max-500:h-[1230px] max-sm:h-[1240px] sm:h-[916px] md:h-[880px] lg:h-[540px]  items-center justify-center'>
           <div className='pt-[20px] max-500:w-[350px] max-430:text-start w-full mx-auto h-auto'>
-            <div className='min-430:text-4xl text-[30px] leading-[38px] font-semibold text-center max-430:text-start my-6'>Unlock the<HighlightText text={" Power of Code"} /></div>
+            <div className='min-430:text-4xl text-[24px] leading-[38px] font-semibold text-center max-430:text-start my-6'>Unlock the<HighlightText text={" Power of Code"} /></div>
             <p className="min-430:text-center text-left text-richblack-300 min-430:text-lg text-[16px] leading-[24px] min-500:font-medium mt-1">Learn to Build Anything You Can Imagine</p>
           </div>
           <div className='w-full flex justify-center'>

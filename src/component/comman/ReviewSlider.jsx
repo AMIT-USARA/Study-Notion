@@ -54,7 +54,7 @@ function ReviewSlider() {
 
                         {
                             reviews.map((review, index) => (
-                                <SwiperSlide key={index} className='bg-brown-900  p-3 rounded-xl  flex-wrap max-w-[410px]'>
+                                <SwiperSlide key={index} className='bg-brown-900  p-3 rounded-xl  flex-wrap max-w-[410px] min-w-[270px]'>
 
                                     <div className='flex items-center gap-4 w-full'>
                                         <img

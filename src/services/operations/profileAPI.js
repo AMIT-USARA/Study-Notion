@@ -47,6 +47,7 @@ export async function getUserEnrolledCourses(token) {
         Authorization: `Bearer ${token}`,
       }
     )
+    
    // console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
     //// console.log(
     //   "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
@@ -59,7 +60,7 @@ export async function getUserEnrolledCourses(token) {
     result = response.data.data
   } catch (error) {
    // console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
-    toast.error("Could Not Get Enrolled Courses")
+    toast.error('Could Not Get Enrolled Courses');
   }
   toast.dismiss(toastId)
   return result

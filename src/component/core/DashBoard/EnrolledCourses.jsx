@@ -13,9 +13,12 @@ export default function EnrolledCourses() {
   const [enrolledCourses, setEnrolledCourses] = useState(null)
   const getEnrolledCourses = async () => {
     try {
-      const res = await getUserEnrolledCourses(token);
+      if(token!==null){
+        const res = await getUserEnrolledCourses(token);
+            setEnrolledCourses(res);
+      }
 
-      setEnrolledCourses(res);
+      
     } catch (error) {
       console.log("Could not fetch enrolled courses.")
      

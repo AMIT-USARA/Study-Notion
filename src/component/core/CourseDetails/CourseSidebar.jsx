@@ -14,7 +14,7 @@ const CourseSidebar = ({ courseData }) => {
     const [confirmationModal, setConfirmationModal] = useState(null);
     const [enrolledCourses, setEnrolledCourses] = useState(null)
     const navigate = useNavigate();
-    const { user } = useSelector((state) => state.profile);
+    const { user } = useSelector((state) => state.auth);
     const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const { courseId } = useParams();

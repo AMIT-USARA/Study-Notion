@@ -23,11 +23,11 @@ function InstructorSection() {
 
                 </div>
 
-                <div className='min-550:w-[486px] max-550:max-w-[358px] flex flex-col gap-3 my-auto h-[230px]    max-lg:h-[120px]'>
-                    <div className='min-550:text-[36px] text-[30px] min-550:leading-[44px] leading-[38px] lg:w-[200px] max-550:w-[200px] font-semibold'>
+                <div className='min-550:w-[486px] bg-richblack-500 text-center max-550:max-w-[358px] flex flex-col gap-3 my-auto h-[230px]    max-lg:h-[120px]'>
+                    <div className='sm:text-[36px] text-[30px] max-430:text-[24px] min-550:leading-[44px] leading-[38px] lg:w-[200px] max-550:w-[200px] font-semibold'>
                         Become an <HighlightText text=" instructor" />
                     </div>
-                    <div className='text-[16px] leading-[24px] font-medium text-[#838894] '>
+                    <div className='text-[16px] max-430:px-2 leading-[24px] font-medium text-[#838894] '>
                         Instructors from around the world teach millions of students on StudyNotion. We provide the tools and skills to teach what you love.
                     </div>
                     <div className='lg:block hidden w-fit pt-[52px]'>

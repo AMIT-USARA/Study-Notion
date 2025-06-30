@@ -11,8 +11,8 @@ const CodeBlocks = ({ position, heading, subheading, ctabtn1, ctabtn2, codeblock
         
         <div className={` w-full flex flex-col ${position} xl:justify-between 2xl:justify-center max-lg:items-center 2xl:gap-[60px] justify-between` } >
 
-            <div className='w-[486px] h-[284px] max-550:w-[358px] max-550:h-[326px] flex flex-col gap-[12px] max-xl:mb-[32px] 2xl:mb-[32px]  '>
-                <div className='text-[36px] leading-[44px] font-semibold'>
+            <div className='w-[486px] h-[284px] max-430:px-2 max-550:w-[358px] max-550:h-[326px] flex flex-col gap-[12px] max-xl:mb-[32px] 2xl:mb-[32px]  '>
+                <div className='max-430:text-[24px] text-[30px] sm:text-[36px] leading-[44px] font-semibold'>
                     {heading}
                 </div>
                 <div className='text-[#838894] text-[16px] leading-[24px] font-medium pr-10'>
