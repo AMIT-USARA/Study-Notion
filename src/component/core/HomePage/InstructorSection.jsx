@@ -23,7 +23,7 @@ function InstructorSection() {
 
                 </div>
 
-                <div className='min-550:w-[486px] bg-richblack-500 text-center max-550:max-w-[358px] flex flex-col gap-3 my-auto h-[230px]    max-lg:h-[120px]'>
+                <div className='min-550:w-[486px] text-center sm:text-left max-550:max-w-[358px] flex flex-col gap-3 my-auto h-[230px]    max-lg:h-[120px]'>
                     <div className='sm:text-[36px] text-[30px] max-430:text-[24px] min-550:leading-[44px] leading-[38px] lg:w-[200px] max-550:w-[200px] font-semibold'>
                         Become an <HighlightText text=" instructor" />
                     </div>
