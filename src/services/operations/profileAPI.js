@@ -26,7 +26,7 @@ export function getUserDetails(token, navigate) {
       dispatch(setUser({ ...response.data.data, image: userImage }))
     } catch (error) {
       dispatch(logout(navigate))
-     // console.log("GET_USER_DETAILS API ERROR............", error)
+     console.log("GET_USER_DETAILS API ERROR............", error)
       toast.error("Could Not Get User Details")
     }
     toast.dismiss(toastId)
@@ -37,7 +37,9 @@ export function getUserDetails(token, navigate) {
 export async function getUserEnrolledCourses(token) {
   const toastId = toast.loading("Loading...")
   let result = []
-  try {
+
+  if(token){
+    try {
    // console.log("BEFORE Calling BACKEND API FOR ENROLLED COURSES");
     const response = await apiConnector(
       "GET",
@@ -62,8 +64,11 @@ export async function getUserEnrolledCourses(token) {
    // console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
     toast.error('Could Not Get Enrolled Courses');
   }
+  }
+
+  
   toast.dismiss(toastId)
-  return result
+  return result;
 }
 
 export async function getAllCourses() {

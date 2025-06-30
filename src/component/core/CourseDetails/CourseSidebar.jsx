@@ -42,7 +42,7 @@ const CourseSidebar = ({ courseData }) => {
             return;
         }
         if (token) {
-           // console.log("courseData:-", courseData?.data?.courseDetails);
+            // console.log("courseData:-", courseData?.data?.courseDetails);
             dispatch(addToCart(courseData?.data));
             return;
         }
@@ -84,19 +84,22 @@ const CourseSidebar = ({ courseData }) => {
 
 
     const getEnrolledCourses = async () => {
-        try {
-            const res = await getUserEnrolledCourses(token);
-            setEnrolledCourses(res);
-        } catch (error) {
-           // console.log("Could not fetch enrolled courses.")
+        if (token) {
+            try {
+                const res = await getUserEnrolledCourses(token);
+                setEnrolledCourses(res);
+            } catch (error) {
+                console.log("Could not fetch enrolled courses.")
+            }
         }
-    };
+        
+    }
     useEffect(() => {
         getEnrolledCourses();
     }, [])
 
-   // console.log("eccc:-", enrolledCourses);
-   // console.log("CDccc:-", courseData);
+    // console.log("eccc:-", enrolledCourses);
+    // console.log("CDccc:-", courseData);
 
     const isCourseAlreadyEnrolled = () => {
         if (!enrolledCourses || !courseData?.data?.courseDetails?._id) return false;
