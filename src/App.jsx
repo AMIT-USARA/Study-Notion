@@ -140,6 +140,18 @@ function App() {
               </>
             )
           }
+          {
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route
+                  path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                  element={<VideoDetails />}
+                >
+
+                </Route>
+              </>
+            )
+          }
 
         </Route>
 

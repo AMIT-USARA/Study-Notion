@@ -29,7 +29,7 @@ const Template = ({ title, desc1, desc2, image, formtype }) => {
 
             <div className='flex w-full items-center my-4 gap-x-2'>
               <div className='bg-richblack-700 w-full h-[1px]'></div>
-              <p className='font-medium leading-[1.375rem] text-richblack-700'>OR</p>
+              <p className='font-medium leading-[1.375rem] text-richblack-300'>OR</p>
               <div className='bg-richblack-700 w-full h-[1px]'></div>
             </div>
 

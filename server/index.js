@@ -1,7 +1,5 @@
 const express = require("express");
-
 const app = express();
-
 
 const courseRoutes = require("./Routes/Course");
 const profileRoutes = require("./Routes/Profile");
@@ -16,42 +14,45 @@ const cors = require("cors");
 const {cloudinaryConnect} = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
 
-
 const PORT = process.env.PORT || 3001;
-
 
 database.Connect(); 
 
 app.use(express.json());
 app.use(cookieParser());
+
+// Updated CORS configuration
 app.use(
-    cors({
-        origin:"*",
-        credentials:true,
-    })
-)
+  cors({
+    origin: ["https://studynotion-usara-amit.vercel.app", "http://localhost:3000"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(
-    fileUpload({
-        useTempFiles:true,
-        tempFileDir:"/tmp",
-    })
-)
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp",
+  })
+);
 
 cloudinaryConnect();
 
-app.use("/api/v1/auth",userRoutes);
-app.use("/api/v1/profile",profileRoutes);
-app.use("/api/v1/course",courseRoutes);
-app.use("/api/v1/payment",paymentsRoutes);
-app.use("/api/v1/reach",contactUsRoute)
-app.get("/",(req,res)=>{
-    return res.json({
-        success:true,
-        message:"Your server is up and running...."
-    });
+app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/course", courseRoutes);
+app.use("/api/v1/payment", paymentsRoutes);
+app.use("/api/v1/reach", contactUsRoute);
+
+app.get("/", (req, res) => {
+  return res.json({
+    success: true,
+    message: "Your server is up and running...."
+  });
 });
 
-app.listen(PORT,()=>{
-    console.log(`App is running at ${PORT}`);
-})
+app.listen(PORT, () => {
+  console.log(`App is running at ${PORT}`);
+});
