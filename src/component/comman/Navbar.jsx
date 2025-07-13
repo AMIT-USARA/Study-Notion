@@ -84,14 +84,14 @@ function Navbar() {
                             : "hidden min-850:flex"
                         }`}
                 >
-                    <ul className="flex flex-row min-850:flex-row gap-6 text-richblack-900 min-850:text-[#DBDDEA]">
+                    <ul className="flex flex-row min-850:flex-row gap-4 text-richblack-900 min-850:text-[#DBDDEA]">
                         {NavbarLinks.map((item, idx) => (
                             <li key={idx} className="relative group">
                                 {item.title === "Catalog" ? (
                                     <div className="flex items-center gap-1 cursor-pointer">
                                         <p className="hover:text-[#FFD60A]">{item.title}</p>
                                         <MdKeyboardArrowDown />
-                                        <div className="absolute top-8 left-0 w-[200px] rounded-md z-50 bg-richblack-5 p-4 shadow-lg invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                        <div className="absolute top-8 left-0 w-[200px] rounded-md z-50 bg-richblack-5 p-2 shadow-lg invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300">
                                             {sublinks.length ? (
                                                 sublinks.map((subLink, index) => (
                                                     <Link

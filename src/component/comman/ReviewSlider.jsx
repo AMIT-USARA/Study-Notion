@@ -36,7 +36,7 @@ function ReviewSlider() {
 
     return (
         <div className='text-center w-9/12 mb-32 flex items-center justify-center flex-col '>
-            <p className='text-3xl  w-fit text-center p-4 shadow-richblack-400 shadow-xl'>Reviews from other learners</p>
+            <p className='sm:text-3xl  w-fit text-center p-4 shadow-richblack-400 shadow-xl'>Reviews from other learners</p>
             <div className='text-white mt-20 flex items-center justify-center'>
 
                 <div className='h-[190px] max-w-maxContent'>
@@ -54,10 +54,10 @@ function ReviewSlider() {
 
                         {
                             reviews.map((review, index) => (
-                                <SwiperSlide key={index} className='shadow-richblack-400 shadow-xl  p-3 rounded-xl  flex-wrap max-w-[410px] min-w-[270px]'>
+                                <SwiperSlide key={index} className='shadow-richblack-400 shadow-xl  p-3 rounded-xl  flex-wrap max-w-[370px] min-430:max-w-[410px] min-w-[270px]'>
 
-                                    <div className='flex items-center justify-between gap-4 w-full'>
-                                        <p className='p-2'><b>{review?.user?.firstName} {review?.user?.lastName}</b></p>
+                                    <div className='max-430:flex items-center justify-between gap-4 w-full'>
+                                        <p className='p-2 max-430:text-[10px]'><b>{review?.user?.firstName} {review?.user?.lastName}</b></p>
                                         <img
                                             src={review?.user?.image
                                                 ? review?.user?.image

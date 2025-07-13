@@ -12,7 +12,11 @@ const Template = ({ title, desc1, desc2, image, formtype }) => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.auth)
   return (
-    <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+    <div className="grid min-h-[calc(100vh-3.5rem)] mt-20 place-items-center">
+       <p className='text-richblue-100  shadow-richblack-500 shadow-xl p-3 md:text-2xl'>
+              please wait 1 minute before {formtype}.
+              if first attempt is failed.
+            </p>
       {loading ? (
         <div className="spinner"></div>
       ) : (
@@ -39,36 +43,29 @@ const Template = ({ title, desc1, desc2, image, formtype }) => {
                 <p>If you already have an account, please click <Link to={"/login"} className='text-yellow-5 underline font-bold text-[8px] '>
                   - Here.
                 </Link></p>
-
+                
               </div>) : (<div className='flex font-bold'>
                 <p>If you don't have an account, please click <Link to={"/signup"} className='text-yellow-5 underline font-bold text-[8px] '>
                   - Here.
                 </Link></p>
-
+                
               </div>)}
             </button>
           </div>
-          <div className='w-full h-11/12 flex flex-col-reverse gap-10 justify-center items-center'>
-            <div className='relative lg:block hidden w-11/12 max-w-[450px]'>
-              <img src={frameImage}
-                alt="students"
-                width={558}
-                height={490}
-                loading='lazy' />
-              <img src={image}
-                alt="Pattern"
-                width={558}
-                height={504}
-                loading='lazy'
-                className='absolute -top-4 right-4'
-              />
-            </div>
-            <p className='text-richblue-100 shadow-richblack-500 shadow-xl p-3 text-2xl'>
-              please wait 1 minute before {formtype}.
-              if first attempt is failed.
-            </p>
+          <div className='relative lg:block hidden w-11/12 max-w-[450px]'>
+            <img src={frameImage}
+              alt="students"
+              width={558}
+              height={490}
+              loading='lazy' />
+            <img src={image}
+              alt="Pattern"
+              width={558}
+              height={504}
+              loading='lazy'
+              className='absolute -top-4 right-4'
+            />
           </div>
-
         </div>
       )}
     </div>
