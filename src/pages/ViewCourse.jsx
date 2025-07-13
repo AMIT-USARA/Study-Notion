@@ -34,7 +34,7 @@ function ViewCourse() {
   }, [])
 
   return (
-    <div className="relative flex min-h-[calc(100vh-3.5rem)] bg-richblack-900">
+    <div className="relative mt-20 flex min-h-[calc(100vh-3.5rem)] bg-richblack-900">
       {/* Sidebar */}
       <div className="hidden md:block w-[320px] h-full flex-shrink-0 border-r border-r-richblack-700">
         <VideoDetailsSidebar setReviewModal={setReviewModal} />

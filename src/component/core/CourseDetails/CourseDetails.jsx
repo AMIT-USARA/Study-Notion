@@ -74,7 +74,7 @@ function CourseDetails() {
     }
 
     return (
-        <div className='bg-richblack-900 text-richblack-5 min-h-screen relative'>
+        <div className='bg-richblack-900 text-richblack-5 min-h-screen relative mt-20'>
             <CourseHero courseData={courseData} />
             
             <div className='mx-auto w-11/12 max-w-maxContent py-8 flex flex-col lg:flex-row gap-10'>

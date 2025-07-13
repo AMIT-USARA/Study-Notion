@@ -19,7 +19,7 @@ function ForgotPassword() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen mt-20 flex items-center justify-center bg-gray-100">
             {loading ? (
                 <div className="text-center text-lg font-semibold">Loading...</div>
             ) : !emailSent ? (

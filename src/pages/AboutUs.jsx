@@ -9,7 +9,7 @@ import ContectUsFile from '../component/core/AboutPage/ContectUsFile';
 import ReviewSilder from '../component/comman/ReviewSlider'
 function AboutUs() {
   return (
-    <div className="text-white flex relative min-w-screen  flex-col gap-[32px]">
+    <div className="text-white flex relative min-w-screen mt-10 flex-col gap-[32px]">
       
         <TopBoxSection/>
         <HighlightPoint/>

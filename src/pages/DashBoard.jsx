@@ -18,7 +18,7 @@ function DashBoard() {
     )
   }
   return (
-    <div className='relative flex text-white'>
+    <div className='relative flex text-white mt-20'>
 
       <div className='max-md:absolute z-10 h-full'>
         <div className='md:hidden z-50 absolute duration-1000 right-0' onClick={() => setOpen(!open)}>

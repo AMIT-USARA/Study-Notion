@@ -146,7 +146,7 @@ const VideoDetails = () => {
 
   }
   return (
-    <div className=' text-white text-xl flex flex-col-reverse'>
+    <div className=' text-white text-xl mt-20 flex flex-col-reverse'>
       {
         !videoData ? (<div>
           No Data Found

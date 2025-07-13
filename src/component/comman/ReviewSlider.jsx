@@ -35,9 +35,9 @@ function ReviewSlider() {
 
 
     return (
-        <div className='text-center w-9/12 mb-24'>
-            <p className='text-3xl '>Reviews from other learners</p>
-            <div className='text-white mt-10'>
+        <div className='text-center w-9/12 mb-32 flex items-center justify-center flex-col '>
+            <p className='text-3xl  w-fit text-center p-4 shadow-richblack-400 shadow-xl'>Reviews from other learners</p>
+            <div className='text-white mt-20 flex items-center justify-center'>
 
                 <div className='h-[190px] max-w-maxContent'>
                     <Swiper
@@ -54,17 +54,18 @@ function ReviewSlider() {
 
                         {
                             reviews.map((review, index) => (
-                                <SwiperSlide key={index} className='bg-brown-900  p-3 rounded-xl  flex-wrap max-w-[410px] min-w-[270px]'>
+                                <SwiperSlide key={index} className='shadow-richblack-400 shadow-xl  p-3 rounded-xl  flex-wrap max-w-[410px] min-w-[270px]'>
 
-                                    <div className='flex items-center gap-4 w-full'>
+                                    <div className='flex items-center justify-between gap-4 w-full'>
+                                        <p className='p-2'><b>{review?.user?.firstName} {review?.user?.lastName}</b></p>
                                         <img
                                             src={review?.user?.image
                                                 ? review?.user?.image
                                                 : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`}
                                             alt='Profile Pic'
-                                            className='h-9 w-9 object-cover rounded-full'
+                                            className='h-12 w-12 object-cover rounded-full'
                                         />
-                                        <p>{review?.user?.firstName} {review?.user?.lastName}</p>
+                                        
                                     </div>
                                      <div className='flex items-center px-3'>
                                         <p>
@@ -83,8 +84,8 @@ function ReviewSlider() {
                                         </div>
                                     </div>
 
-                                    <p className='px-3 text-left'>{review?.course?.courseName}</p>
-                                    <p className='px-3 text-left'>
+                                    <p className='px-3 text-left text-xl'><b>{review?.course?.courseName}</b></p>
+                                    <p className='px-3 text-left text-richblack-200'>
                                         {review?.review}
                                     </p>
                                    

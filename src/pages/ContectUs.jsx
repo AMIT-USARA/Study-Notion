@@ -34,7 +34,7 @@ function ContectUs() {
 
 
   return (
-    <div className='text-white'>
+    <div className='text-white mt-20'>
       <div className='text-[#F1F2FF]  mx-5 my-10 flex max-lg:flex-col items-center max-lg:items-center justify-center gap-6'>
         <div className=' min-500:w-[450px] h-[390px] bg-[#161D29] flex flex-col gap-[24px]'>
           {

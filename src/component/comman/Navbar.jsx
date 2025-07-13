@@ -57,7 +57,7 @@ function Navbar() {
     const matchRoute = (route) => matchPath({ path: route }, location.pathname);
 
     return (
-        <div className="w-full bg-[#000814] border-b border-[#2C333F]">
+        <div className="w-full bg-[#000814] border-b border-[#2C333F] fixed z-50">
             <div className="max-w-screen-xl mx-auto flex items-center justify-between py-4 px-6">
                 {/* Logo */}
                 <Link to="/" className="h-8 w-40">

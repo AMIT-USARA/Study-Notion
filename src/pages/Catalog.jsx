@@ -43,7 +43,7 @@ function Catalog() {
 
 
     return (
-        <div className='bg-richblack-900 text-richblack-5 min-h-screen'>
+        <div className='bg-richblack-900 text-richblack-5 min-h-screen mt-20'>
             {/* Hero Section */}
             <div className='bg-richblack-800'>
                 <div className='mx-auto w-11/12 max-w-maxContent py-8'>

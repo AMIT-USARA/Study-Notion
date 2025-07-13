@@ -8,7 +8,7 @@ function PlateFormInfo() {
 
 
     return (
-        <div className='flex items-center xl:py-[90px] py-[50px] justify-center min-h-[254px] flex-wrap  max-sm:py-10 '>
+        <div className='flex items-center xl:py-[90px] py-[50px] justify-center min-h-[254px] flex-wrap  max-sm:py-10 mt-20'>
             <div className='xl:w-[1200px]  flex-wrap max-sm:gap-10 sm:px-[50px] xl:px-0 h-full flex justify-between items-center'>
 
                 <div className='flex sm:w-[600px] px-4 max-430:pb-10  justify-evenly flex-wrap'>
