@@ -13,6 +13,7 @@ export default function ChipInput({
 }) {
   const { editCourse, course } = useSelector((state) => state.course)
   const [chips, setChips] = useState([])
+  const [inputValue, setInputValue] = useState("")
 
   useEffect(() => {
     if (editCourse && course?.tag) {
@@ -28,15 +29,19 @@ export default function ChipInput({
     setValue(name, chips)
   }, [chips, name, setValue])
 
+  const handleAddChip = () => {
+    const chipValue = inputValue.trim()
+    if (chipValue && !chips.includes(chipValue)) {
+      const newChips = [...chips, chipValue]
+      setChips(newChips)
+      setInputValue("")
+    }
+  }
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter" || event.key === ",") {
       event.preventDefault()
-      const chipValue = event.target.value.trim()
-      if (chipValue && !chips.includes(chipValue)) {
-        const newChips = [...chips, chipValue]
-        setChips(newChips)
-        event.target.value = ""
-      }
+      handleAddChip()
     }
   }
 
@@ -51,9 +56,9 @@ export default function ChipInput({
         {label} <sup className="text-pink-200">*</sup>
       </label>
       
-      <div className={`flex w-full flex-wrap items-center gap-2 rounded-lg bg-richblack-700 p-3 ${errors[name] ? "ring-1 ring-pink-200" : ""}`}>
+      <div className={`flex w-full items-center gap-2 rounded-lg bg-richblack-700 p-3 ${errors[name] ? "ring-1 ring-pink-200" : ""}`}>
         {/* Chips Container */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-1 flex-wrap gap-2">
           {chips?.map((chip, index) => (
             <div
               key={index}
@@ -70,17 +75,28 @@ export default function ChipInput({
               </button>
             </div>
           ))}
-        </div>
 
-        {/* Input Field */}
-        <input
-          id={name}
-          name={name}
-          type="text"
-          placeholder={chips.length === 0 ? placeholder : "Add another..."}
-          onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent text-richblack-5 placeholder-richblack-400 focus:outline-none"
-        />
+          {/* Input Field and Add Button */}
+          <div className="flex flex-1 items-center gap-2">
+            <input
+              id={name}
+              name={name}
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder={chips.length === 0 ? placeholder : "Add another..."}
+              onKeyDown={handleKeyDown}
+              className="flex-1 bg-transparent text-richblack-5 placeholder-richblack-400 focus:outline-none"
+            />
+            <button
+              type="button"
+              onClick={handleAddChip}
+              className="rounded-md bg-yellow-50 px-3 py-1 text-sm font-medium text-richblack-900 hover:bg-yellow-100 focus:outline-none"
+            >
+              Add
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Error Message */}

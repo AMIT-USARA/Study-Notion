@@ -30,9 +30,10 @@ exports.createSubSection = async (req, res) => {
         );
         // console.log(2222);
         // Create new subsection
+        // console.log("uploadDetails.duration",uploadDetails.duration);
         const newSubSection = await SubSection.create({
             title,
-            timeDuration: `${Math.round(uploadDetails.duration)}:00` || "0:00",
+            timeDuration: `00:${Math.round(uploadDetails.duration)}` || "0:00",
             description,
             videoUrl: uploadDetails.secure_url,
         });
@@ -72,7 +73,7 @@ exports.updateSubSection = async (req, res) => {
 
         const { title, subSectionId, videoUrl, sectionId, description } = req.body;
 
-       console.log(title)
+    //    console.log(title)
 
         //data validation
         if (!title || !subSectionId) {

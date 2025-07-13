@@ -114,7 +114,7 @@ function SubSectionModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm overflow-scroll">
       <div className="w-full max-w-[500px] rounded-lg bg-richblack-800 p-6 shadow-lg">
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-richblack-600 pb-4">

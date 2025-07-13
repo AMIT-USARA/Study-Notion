@@ -360,7 +360,11 @@ exports.getCourseDetails = async (req, res) => {
       })
     })
 
+    // console.log("totalDurationInSeconds:-",totalDurationInSeconds);
+
+
     const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+    // console.log("totalDuration:-",totalDuration);
 
     return res.status(200).json({
       success: true,

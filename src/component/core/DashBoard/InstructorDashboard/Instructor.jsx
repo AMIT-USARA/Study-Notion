@@ -35,12 +35,12 @@ const Instructor = () => {
     )
 
     return (
-        <div className="text-white  px-6 py-8 w-full space-y-10">
+        <div className="text-white  sm:px-6 py-8 w-full space-y-10">
             <div className="space-y-1 text-left">
                 <h1 className="text-3xl font-bold text-yellow-400">Hi {user?.firstName} 👋</h1>
                 <p className="text-gray-400 text-sm">Let’s start something new today</p>
             </div>
-            <div className='w-full  flex flex-wrap items-center justify-center  space-y-10'>
+            <div className='w-full   flex flex-wrap items-center justify-center  space-y-10'>
 
 
                 {loading ? (
@@ -48,19 +48,21 @@ const Instructor = () => {
                         <div className="loader border-t-4 border-yellow-400 border-solid rounded-full w-10 h-10 animate-spin"></div>
                     </div>
                 ) : courses.length > 0 ? (
-                    <div className="space-y-12 w-9/12">
+                    <div className="space-y-12 xl:w-9/12 w-full ">
                         {/* Chart & Stats */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-[900px]">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-[900px]">
                             <InstructorChart courses={instructorData} />
-
-                            <div className=" p-6 rounded-2xl shadow-lg">
-                                <h2 className="text-xl font-semibold mb-6">📊 Statistics</h2>
-                                <div className="space-y-4">
-                                    <StatCard label="Total Courses" value={courses.length} />
-                                    <StatCard label="Total Students" value={totalStudents} />
-                                    <StatCard label="Total Income" value={`₹ ${totalAmount}`} />
+                            <div className='flex flex-col items-center'>
+                                <div className=" sm:p-6 rounded-2xl shadow-lg max-w-[550px] ">
+                                    <h2 className="text-xl font-semibold mb-6">📊 Statistics</h2>
+                                    <div className="space-y-4 space-x-2">
+                                        <StatCard label="Total Courses" value={courses.length} />
+                                        <StatCard label="Total Students" value={totalStudents} />
+                                        <StatCard label="Total Income" value={`₹ ${totalAmount}`} />
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
                         {/* Course Preview */}
@@ -118,7 +120,7 @@ const Instructor = () => {
 
 // Helper Component for Stats
 const StatCard = ({ label, value }) => (
-    <div className="bg-gray-900 p-4 rounded-lg flex justify-between items-center">
+    <div className="bg-gray-900 p-4 rounded-lg flex justify-between min-w-[350px] items-center">
         <p className="text-gray-300">{label}</p>
         <p className="text-lg font-bold text-richblack-100">{value}</p>
     </div>

@@ -61,22 +61,33 @@ const CourseSidebar = ({ courseData }) => {
     }
 
     // Calculate total duration
-    const calculateTotalDuration = () => {
-        if (!courseData?.data?.courseDetails?.courseContent) return "0 hours"
+   const calculateTotalDuration = () => {
+    if (!courseData?.data?.courseDetails?.courseContent) return "0 seconds"
+    console.log("courseData?.data?.courseDetails?.courseContent :- ",courseData?.data?.courseDetails?.courseContent);
+    let totalSeconds = 0
 
-        let totalMinutes = 0
-        courseData?.data?.courseDetails?.courseContent.forEach(section => {
-            section.subSection.forEach(sub => {
-                const [minutes, seconds] = sub.timeDuration.split(":").map(Number)
-                totalMinutes += minutes + (seconds / 60)
-            })
+    courseData.data.courseDetails.courseContent.forEach(section => {
+        section.subSection.forEach(sub => {
+            const [minutes, seconds] = sub.timeDuration.split(":").map(Number)
+            totalSeconds += (minutes * 60) + seconds
         })
+    })
 
-        const hours = Math.floor(totalMinutes / 60)
-        const remainingMinutes = Math.round(totalMinutes % 60)
+    console.log("ts:-",totalSeconds)
 
-        return `${hours > 0 ? `${hours} hour${hours > 1 ? 's' : ''}` : ''} ${remainingMinutes > 0 ? `${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}` : ''}`.trim()
-    }
+    const hours = Math.floor(totalSeconds / 3600)
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+    const seconds = totalSeconds % 60
+
+    const hourPart = hours > 0 ? `${hours} hour${hours > 1 ? 's' : ''}` : ''
+    const minutePart = minutes > 0 ? `${minutes} minute${minutes > 1 ? 's' : ''}` : ''
+    const secondPart = seconds > 0 ? `${seconds} second${seconds > 1 ? 's' : ''}` : ''
+
+    const formatted = [hourPart, minutePart, secondPart].filter(Boolean).join(' ')
+
+    return formatted || '0 seconds'
+}
+
 
 
 

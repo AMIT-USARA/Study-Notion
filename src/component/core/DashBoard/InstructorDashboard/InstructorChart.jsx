@@ -48,7 +48,7 @@ const InstructorChart = ({ courses }) => {
   };
 
   return (
-    <div className="bg-richblack-800 text-white p-6 rounded-2xl shadow-lg w-full max-w-2xl mx-auto">
+    <div className="bg-richblack-800 text-white p-6 min-w-[500px] rounded-2xl flex flex-col items-center justify-center shadow-lg w-fit max-w-2xl mx-auto">
       <p className="text-xl font-semibold mb-4">Visualize Course Stats</p>
 
       <div className="flex gap-4 mb-6">
@@ -76,7 +76,7 @@ const InstructorChart = ({ courses }) => {
       </div>
 
       {/* Fixed-size chart container */}
-      <div className="h-[400px] w-full animate-fade-in transition-opacity duration-500">
+      <div className="h-[400px] w-fit animate-fade-in transition-opacity duration-500">
         <Pie data={chartData} options={options} />
       </div>
     </div>
